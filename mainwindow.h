@@ -21,8 +21,14 @@ public:
     MainWindow(Model& model, QWidget *parent = nullptr);
     ~MainWindow();
 
+    void mousePressEvent(QMouseEvent *);
+
 private:
     Ui::MainWindow *ui;
     QVector<QVector<QLabel *>> cells;
+    QVector<QLabel* > numbers;
+
+    int indexJ;
+    int indexI;
 };
 #endif // MAINWINDOW_H
