@@ -2,6 +2,11 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLabel>
+#include <QGridLayout>
+#include <iostream>
+#include <QString>
+#include <QVector>
 #include "model.h"
 
 QT_BEGIN_NAMESPACE
@@ -18,5 +23,6 @@ public:
 
 private:
     Ui::MainWindow *ui;
+    QVector<QVector<QLabel *>> cells;
 };
 #endif // MAINWINDOW_H
