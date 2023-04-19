@@ -31,6 +31,8 @@ public:
 
 signals:
     void sendPuzzleInput(int, int, int);
+    void sendErase(int, int);
+    //void sendAddNumber(int, int, int);
 
 private slots:
     void receiveCorrectInput(int, int, int);
@@ -39,6 +41,8 @@ private slots:
     void receiveSecondChace();
     void receiveNewGame();
     void receiveTutorial();
+
+    void on_eraseButton_clicked();
 
 private:
     Ui::MainWindow *ui;

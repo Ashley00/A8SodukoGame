@@ -33,13 +33,13 @@ void Model::receivePuzzleInput(int input, int indexJ, int indexI)
     if(solutionVector[indexJ][indexI] == input + 1){
         currentVector[indexJ][indexI] = input + 1;
         if(currentVector == solutionVector){
-            emit(sendCorrectInput(input, indexJ, indexI));
-            emit(sendWonGame());
+            emit sendCorrectInput(input, indexJ, indexI);
+            emit sendWonGame();
         }else{
-            emit(sendCorrectInput(input, indexJ, indexI));
+            emit sendCorrectInput(input, indexJ, indexI);
         }
     }else{
-        emit(sendIncorrectInput(input, indexJ, indexI));
+        emit sendIncorrectInput(input, indexJ, indexI);
     }
 }
 
@@ -81,4 +81,13 @@ void Model::generator()
 
 }
 
-
+/**
+ * @brief Model::erase
+ * Erase the selected number from displayVector in model
+ */
+void Model::receiveErase(int indexI, int indexJ)
+{
+    displayVector[indexI][indexJ] = 0;
+    currentVector[indexI][indexJ] = 0;
+    //qDebug() << "display" << displayVector[indexI][indexJ] << "current" << currentVector[indexI][indexJ];
+}

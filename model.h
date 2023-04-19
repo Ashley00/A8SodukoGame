@@ -30,6 +30,7 @@ public slots:
     void changeLevel(int level);
     void generator();
     void receivePuzzleInput(int, int, int);
+    void receiveErase(int, int);
 
 };
 

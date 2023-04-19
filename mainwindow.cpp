@@ -11,7 +11,13 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->winGame->setVisible(false);
+
+    // initialize index with -1
+    indexI = -1;
+    indexJ = -1;
     mistakes = 0;
+
     /* Sudoku Board Widget */
     QGridLayout *gridLayout = new QGridLayout(ui->squareWidget);
     gridLayout->setSpacing(0);
@@ -70,6 +76,16 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
         numberLabel->setText(QString::number(i+1));
         numbers.push_back(numberLabel);
     }
+
+    // set the erase button
+    ui->eraseButton->setIcon(QIcon(":/images/eraser.png"));
+    ui->eraseButton->setIconSize(QSize(80,80));
+
+    connect(this,
+            &MainWindow::sendErase,
+            &model,
+            &Model::receiveErase);
+    //connect(this,&MainWindow::sendAddNumber,&model,&Model::receiveAdd);
 
     /******** BEGIN CONNECTIONS ********/
 
@@ -139,7 +155,7 @@ void MainWindow::mousePressEvent(QMouseEvent * event) {
         }
         else if(isInNumbers){
             int tempX = 325;
-            int indexINumber;
+            int indexINumber = -1;
             for(int i = 0; i < level; i++){
                 if(x<tempX){
                     indexINumber = i;
@@ -153,7 +169,7 @@ void MainWindow::mousePressEvent(QMouseEvent * event) {
                 QColor selectedColor = cells[indexJ][indexI]->palette().color(QPalette::Base);
                 QColor lightblue = QColor(173, 216, 230, 128);
                 if(selectedColor == lightblue){
-                    emit(sendPuzzleInput(indexINumber, indexJ, indexI));
+                    emit sendPuzzleInput(indexINumber, indexJ, indexI);
                     //cells[indexJ][indexI]->setText(numbers[indexINumber]->text());
                 }
             }
@@ -314,9 +330,15 @@ void MainWindow::receiveIncorrectInput(int input, int indexJ, int indexI)
     }
 }
 
+/**
+ * @brief MainWindow::shonkWin
+ * When win the game, show congratulation message
+ */
 void MainWindow::receiveWonGame()
 {
     qDebug() << "Game Won!";
+    ui->winGame->setVisible(true);
+
 }
 
 void MainWindow::receiveSecondChace()
@@ -339,3 +361,22 @@ void MainWindow::receiveTutorial()
 {
 
 }
+
+/**
+ * @brief MainWindow::on_eraseButton_clicked
+ * When click the erase button, remove the current selected number.
+ * If nothing has been selected, click this button won't work
+ */
+void MainWindow::on_eraseButton_clicked()
+{
+    if(indexI != -1 && indexJ != -1)
+    {
+        if(cells[indexJ][indexI]->isEnabled())
+        {
+            emit sendErase(indexJ, indexI);
+
+            cells[indexJ][indexI]->setText("");
+        }
+    }
+}
+
