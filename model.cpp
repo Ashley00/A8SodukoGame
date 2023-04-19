@@ -33,6 +33,7 @@ void Model::receivePuzzleInput(int input, int indexJ, int indexI)
     if(solutionVector[indexJ][indexI] == input + 1){
         currentVector[indexJ][indexI] = input + 1;
         if(currentVector == solutionVector){
+            emit(sendCorrectInput(input, indexJ, indexI));
             emit(sendWonGame());
         }else{
             emit(sendCorrectInput(input, indexJ, indexI));
