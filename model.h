@@ -15,13 +15,18 @@ public:
     std::vector<std::vector<int>> displayVector;
     // vector of the solution
     std::vector<std::vector<int>> solutionVector;
+    // vector of the current state
+    std::vector<std::vector<int>> currentVector;
 
 signals:
-
+    void sendCorrectInput(int, int, int);
+    void sendIncorrectInput(int, int, int);
+    void sendWonGame();
 
 public slots:
     void changeLevel(int level);
     void generator();
+    void receivePuzzleInput(int, int, int);
 
 };
 

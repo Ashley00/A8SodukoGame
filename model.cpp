@@ -1,4 +1,5 @@
 #include "model.h"
+#include <QDebug>
 
 /**
  * @brief Model::Model Constructor
@@ -17,8 +18,26 @@ Model::Model(QObject *parent)
                       {4,3,2,1},
                       {3,2,1,4},
                       {1,4,3,2}};
-
+    currentVector = displayVector;
 }
+
+void Model::receivePuzzleInput(int input, int indexJ, int indexI)
+{
+   qDebug() << "User input received...:";
+   qDebug() << "Input number: " << input + 1 << " indexJ: " << indexJ << " indexI: " << indexI;
+    /* Check to see if input is correct */
+    if(solutionVector[indexJ][indexI] == input + 1){
+        currentVector[indexJ][indexI] = input + 1;
+        if(currentVector == solutionVector){
+            emit(sendWonGame());
+        }else{
+            emit(sendCorrectInput(input, indexJ, indexI));
+        }
+    }else{
+        emit(sendIncorrectInput(input, indexJ, indexI));
+    }
+}
+
 
 /**
  * @brief Model::changeLevel
@@ -56,3 +75,5 @@ void Model::generator()
 
 
 }
+
+

@@ -23,6 +23,16 @@
       <height>500</height>
      </rect>
     </property>
+    <widget class="QWidget" name="gameOverDialog" native="true">
+     <property name="geometry">
+      <rect>
+       <x>150</x>
+       <y>130</y>
+       <width>351</width>
+       <height>221</height>
+      </rect>
+     </property>
+    </widget>
    </widget>
    <widget class="QWidget" name="numberWidget" native="true">
     <property name="geometry">
@@ -34,6 +44,26 @@
      </rect>
     </property>
    </widget>
+   <widget class="QLabel" name="mistakesLabel">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>30</y>
+      <width>161</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Montserrat Alternates</family>
+      <pointsize>15</pointsize>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Mistakes: 0/5</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -41,7 +71,7 @@
      <x>0</x>
      <y>0</y>
      <width>800</width>
-     <height>17</height>
+     <height>24</height>
     </rect>
    </property>
   </widget>

@@ -8,6 +8,7 @@
 #include <QString>
 #include <QVector>
 #include "model.h"
+#include "gameoverdialog.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -22,13 +23,31 @@ public:
     ~MainWindow();
 
     void mousePressEvent(QMouseEvent *);
+    void highlightCurrentRow(int);
+    void highlightCurrentCol(int);
+    void highlightCurrentSquare(int, int);
+
+    void initialize();
+
+signals:
+    void sendPuzzleInput(int, int, int);
+
+private slots:
+    void receiveCorrectInput(int, int, int);
+    void receiveIncorrectInput(int, int, int);
+    void receiveWonGame();
+    void receiveSecondChace();
+    void receiveNewGame();
+    void receiveTutorial();
 
 private:
     Ui::MainWindow *ui;
     QVector<QVector<QLabel *>> cells;
     QVector<QLabel* > numbers;
-
+    GameOverDialog *gameOver;
     int indexJ;
     int indexI;
+    int mistakes;
+
 };
 #endif // MAINWINDOW_H
