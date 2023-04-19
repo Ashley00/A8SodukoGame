@@ -49,5 +49,9 @@ private:
     int indexI;
     int mistakes;
 
+    int level;
+
+    std::vector<std::vector<int>> vector;
+
 };
 #endif // MAINWINDOW_H

@@ -13,6 +13,9 @@ public:
     int level;
     // vector of numbers to display
     std::vector<std::vector<int>> displayVector;
+
+    std::vector<std::vector<int>> prefixVector;
+
     // vector of the solution
     std::vector<std::vector<int>> solutionVector;
     // vector of the current state
