@@ -28,10 +28,10 @@ Model::Model(QObject *parent)
 void Model::receivePuzzleInput(int input, int indexJ, int indexI)
 {
    qDebug() << "User input received...:";
-   qDebug() << "Input number: " << input + 1 << " indexJ: " << indexJ << " indexI: " << indexI;
+   qDebug() << "Input number: " << input << " indexJ: " << indexJ << " indexI: " << indexI;
     /* Check to see if input is correct */
-    if(solutionVector[indexJ][indexI] == input + 1){
-        currentVector[indexJ][indexI] = input + 1;
+    if(solutionVector[indexJ][indexI] == input){
+        currentVector[indexJ][indexI] = input;
         if(currentVector == solutionVector){
             emit sendCorrectInput(input, indexJ, indexI);
             emit sendWonGame();

@@ -6,51 +6,83 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>800</width>
-    <height>800</height>
+    <width>1000</width>
+    <height>500</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="squareWidget" native="true">
+   <widget class="QLabel" name="winGame">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>20</y>
-      <width>500</width>
-      <height>500</height>
+      <x>403</x>
+      <y>431</y>
+      <width>95</width>
+      <height>19</height>
      </rect>
     </property>
-    <widget class="QWidget" name="gameOverDialog" native="true">
-     <property name="geometry">
-      <rect>
-       <x>150</x>
-       <y>130</y>
-       <width>351</width>
-       <height>221</height>
-      </rect>
-     </property>
-    </widget>
+    <property name="text">
+     <string>Win the game!</string>
+    </property>
    </widget>
-   <widget class="QWidget" name="numberWidget" native="true">
+   <widget class="QWidget" name="gameOverDialog" native="true">
     <property name="geometry">
      <rect>
-      <x>200</x>
-      <y>540</y>
-      <width>500</width>
-      <height>60</height>
+      <x>600</x>
+      <y>431</y>
+      <width>191</width>
+      <height>170</height>
      </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="boardWidget" native="true">
+    <property name="geometry">
+     <rect>
+      <x>270</x>
+      <y>10</y>
+      <width>450</width>
+      <height>450</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">background-color: rgb(0, 0, 0,0)</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="eraseButton">
+    <property name="geometry">
+     <rect>
+      <x>740</x>
+      <y>20</y>
+      <width>75</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="undoButton">
+    <property name="geometry">
+     <rect>
+      <x>820</x>
+      <y>20</y>
+      <width>75</width>
+      <height>75</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
     </property>
    </widget>
    <widget class="QLabel" name="mistakesLabel">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>30</y>
-      <width>161</width>
-      <height>51</height>
+      <x>110</x>
+      <y>20</y>
+      <width>143</width>
+      <height>25</height>
      </rect>
     </property>
     <property name="font">
@@ -64,44 +96,33 @@
      <string>Mistakes: 0/5</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="eraseButton">
+   <widget class="QWidget" name="numbersWidget" native="true">
     <property name="geometry">
      <rect>
-      <x>100</x>
-      <y>440</y>
-      <width>80</width>
-      <height>80</height>
+      <x>730</x>
+      <y>20</y>
+      <width>251</width>
+      <height>431</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true"/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="notesButton">
+    <property name="geometry">
+     <rect>
+      <x>900</x>
+      <y>20</y>
+      <width>75</width>
+      <height>75</height>
      </rect>
     </property>
     <property name="text">
      <string/>
     </property>
    </widget>
-   <widget class="QLabel" name="winGame">
-    <property name="geometry">
-     <rect>
-      <x>80</x>
-      <y>390</y>
-      <width>100</width>
-      <height>30</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Win the game!</string>
-    </property>
-   </widget>
   </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>800</width>
-     <height>21</height>
-    </rect>
-   </property>
-  </widget>
-  <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
