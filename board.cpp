@@ -52,6 +52,11 @@ void Board::receiveBoard(int level, std::vector<std::vector<int>> displayVector)
     emit(sendCells(cells));
 }
 
+void Board::receiveVector(int i, int j, int input)
+{
+    vector[i][j] = input;
+}
+
 void Board::mousePressEvent(QMouseEvent *event)
 {
     int x = event->pos().x();
@@ -84,8 +89,14 @@ void Board::setDarkBlue(int j, int i){
 void Board::setTransparent(){
     for(int i = 0; i < level; i++){
         for(int j = 0; j < level; j++){
-            cells[j][i]->setStyleSheet("QLabel { background-color : white ;}");
-            setRedGreen(i, j);
+             cells[i][j]->setStyleSheet("QLabel { background-color : rgba(0, 0, 0, 0);}");
+//            setRedGreen(i, j);
+            if(vector[i][j] == 1){
+                cells[i][j]->setStyleSheet("QLabel { background-color : rgba(0, 0, 0, 0); color: rgba(0, 165, 11, 1);}");
+            }
+            if(vector[i][j] == 2){
+                cells[i][j]->setStyleSheet("QLabel { background-color : rgba(244, 194, 194, 128); color: red;}");
+            }
         }
     }
 }

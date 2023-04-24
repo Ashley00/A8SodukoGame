@@ -31,6 +31,7 @@ public:
 
 public slots:
     void receiveBoard(int, std::vector<std::vector<int>>);
+    void receiveVector(int,int,int);
 
 signals:
     void sendCells(QVector<QVector<QLabel *>>);

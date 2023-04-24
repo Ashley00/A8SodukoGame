@@ -29,6 +29,7 @@ signals:
     void sendErase(int, int);
     void sendInitBoard(int, std::vector<std::vector<int>>);
     void sendInitNumbers(int);
+    void sendSetVector(int,int,int);
 
 private slots:
     void receiveBoxSelected(int, int);

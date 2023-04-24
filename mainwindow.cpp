@@ -24,6 +24,7 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     connect(this, &MainWindow::sendInitBoard, board, &Board::receiveBoard);
     connect(board, &Board::sendCells, this, &MainWindow::receiveCells);
     connect(board, &Board::sendBoxSelected, this, &MainWindow::receiveBoxSelected);
+    connect(this, &MainWindow::sendSetVector, board, &Board::receiveVector);
 
     /* Numbers Widget */
     numbersWidget = new Numbers(ui->numbersWidget);
@@ -107,6 +108,7 @@ void MainWindow::receiveCorrectInput(int input, int indexJ, int indexI)
     cells[indexJ][indexI]->setStyleSheet("QLabel {background-color : rgba(173, 216, 230, 128); color: rgba(0, 165, 11, 1);}");
     cells[indexJ][indexI]->setText(numbers[input - 1]->text());
     vector[indexJ][indexI] = 1;
+    emit sendSetVector(indexJ, indexI, 1);
 }
 
 void MainWindow::receiveIncorrectInput(int input, int indexJ, int indexI)
@@ -121,6 +123,7 @@ void MainWindow::receiveIncorrectInput(int input, int indexJ, int indexI)
     cells[indexJ][indexI]->setText(numbers[input - 1]->text());
 
     vector[indexJ][indexI] = 2;
+    emit sendSetVector(indexJ,indexI,2);
     ui->mistakesLabel->setText(QString("Mistakes: %1/5").arg(mistakes));
     if(mistakes == 5){
 
