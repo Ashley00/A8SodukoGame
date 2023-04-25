@@ -32,7 +32,7 @@ private:
     Ui::Tutorial *ui;
     QVector<QPixmap> slides;
 
-    int totalSlides = 4;
+    int totalSlides = 29;
 
 };
 

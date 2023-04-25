@@ -19,7 +19,7 @@ Tutorial::Tutorial(QWidget *parent) :
     this->setPalette(palette);
 
     // add all slides to QVector as QPixmap
-    for(int i = 1; i < 5; i++){
+    for(int i = 1; i < 30; i++){
         QString imagePath = ":/images/slide" + QString::number(i) + ".png";
         //QImage image = QImage(ui->canvas->size().height(), ui->canvas->size().width(), QImage::Format_RGB32);
         QPixmap pixmap(imagePath);
