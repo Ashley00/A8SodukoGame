@@ -1,0 +1,24 @@
+<RCC>
+    <qresource prefix="/images">
+        <file>background.png</file>
+        <file>easy.png</file>
+        <file>eraser.png</file>
+        <file>exit.png</file>
+        <file>hard.png</file>
+        <file>medium.png</file>
+        <file>egg.png</file>
+        <file>nail.png</file>
+        <file>tutorial.png</file>
+        <file>back.png</file>
+        <file>full.png</file>
+        <file>burger.png</file>
+        <file>slide1.png</file>
+        <file>left.png</file>
+        <file>right.png</file>
+        <file>slide2.png</file>
+        <file>slide3.png</file>
+        <file>slide4.png</file>
+        <file>notes.png</file>
+        <file>undo.png</file>
+    </qresource>
+</RCC>

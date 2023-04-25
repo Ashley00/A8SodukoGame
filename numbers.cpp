@@ -86,3 +86,4 @@ void Numbers::receiveInitNumbers(int level_)
     }
     emit(sendNumbers(numbers));
 }
+

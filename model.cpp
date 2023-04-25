@@ -27,20 +27,20 @@ Model::Model(QObject *parent)
 
 void Model::receivePuzzleInput(int input, int indexJ, int indexI)
 {
-   qDebug() << "User input received...:";
-   qDebug() << "Input number: " << input << " indexJ: " << indexJ << " indexI: " << indexI;
-    /* Check to see if input is correct */
-    if(solutionVector[indexJ][indexI] == input){
-        currentVector[indexJ][indexI] = input;
-        if(currentVector == solutionVector){
-            emit sendCorrectInput(input, indexJ, indexI);
-            emit sendWonGame();
-        }else{
-            emit sendCorrectInput(input, indexJ, indexI);
-        }
-    }else{
-        emit sendIncorrectInput(input, indexJ, indexI);
-    }
+    qDebug() << "User input received...:";
+    qDebug() << "Input number: " << input << " indexJ: " << indexJ << " indexI: " << indexI;
+     /* Check to see if input is correct */
+     if(solutionVector[indexJ][indexI] == input){
+         currentVector[indexJ][indexI] = input;
+         if(currentVector == solutionVector){
+             emit sendCorrectInput(input, indexJ, indexI);
+             emit sendWonGame();
+         }else{
+             emit sendCorrectInput(input, indexJ, indexI);
+         }
+     }else{
+         emit sendIncorrectInput(input, indexJ, indexI);
+     }
 }
 
 
@@ -89,5 +89,6 @@ void Model::receiveErase(int indexI, int indexJ)
 {
     displayVector[indexI][indexJ] = 0;
     currentVector[indexI][indexJ] = 0;
-    qDebug() << "display" << displayVector[indexI][indexJ] << "current" << currentVector[indexI][indexJ];
+    //qDebug() << "display" << displayVector[indexI][indexJ] << "current" << currentVector[indexI][indexJ];
 }
+

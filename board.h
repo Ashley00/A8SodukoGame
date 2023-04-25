@@ -45,7 +45,6 @@ private:
     QVector<QLabel* > numbers;
     std::vector<std::vector<int>> vector;
     int level;
-
 };
 
 #endif // BOARD_H

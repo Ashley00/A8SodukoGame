@@ -164,3 +164,4 @@ void Board::setRedGreen(int i, int j){
 //        qDebug() << "what";
 //    }
 //}
+

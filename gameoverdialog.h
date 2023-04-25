@@ -24,7 +24,7 @@ signals:
 private slots:
     void onSecondChanceClicked();
     void onNewGameClicked();
-    void onTutorialClicked();
+    //void onTutorialClicked();
 
 private:
     Ui::GameOverDialog *ui;
