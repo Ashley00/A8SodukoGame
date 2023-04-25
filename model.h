@@ -20,6 +20,8 @@ public:
     std::vector<std::vector<int>> solutionVector;
     // vector of the current state
     std::vector<std::vector<int>> currentVector;
+    
+    void generateGame(int);
 
 signals:
     void sendCorrectInput(int, int, int);
