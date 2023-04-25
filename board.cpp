@@ -8,11 +8,12 @@ Board::Board(QWidget *parent) :
     ui(new Ui::Board)
 {
     ui->setupUi(this);
-    level = 4;
-    vector = {{0,0,0,0},
-              {0,0,0,0},
-              {0,0,0,0},
-              {0,0,0,0}};
+    ui->lines9x9->setVisible(false);
+    ui->lines4x4->setVisible(false);
+    
+    level = 9;
+    showLines();
+    vector = std::vector<std::vector<int>>(level, std::vector<int>(level, 0));
 }
 
 void Board::receiveBoard(int level, std::vector<std::vector<int>> displayVector)
@@ -101,6 +102,20 @@ void Board::setTransparent(){
     }
 }
 
+void Board::showLines()
+{
+    switch(level){
+    case 4:
+        ui->lines4x4->setVisible(true);
+        break;
+    case 6:
+        break;
+    case 9:
+        ui->lines9x9->setVisible(true);
+        break;
+    }
+}
+
 Board::~Board()
 {
     delete ui;
@@ -124,32 +139,74 @@ void Board::highlightCurrentCol(int indexI)
 
 void Board::highlightCurrentSquare(int indexJ, int indexI)
 {
-    if((indexJ >= 0 && indexJ <= 1) && (indexI >= 0 && indexI <= 1)){
-        for(int i = 0; i < 2; i++)
-            for(int j = 0; j < 2; j++){
-                setDarkBlue(i, j);
-                setRedGreen(i, j);
+    switch(level){
+
+    case 4:
+        if((indexJ >= 0 && indexJ <= 1) && (indexI >= 0 && indexI <= 1)){
+            for(int i = 0; i < 2; i++)
+                for(int j = 0; j < 2; j++){
+                    setDarkBlue(i, j);
+                    setRedGreen(i, j);
+                }
+        }else if((indexJ >= 2 && indexJ <= 3) && (indexI >= 0 && indexI <= 1)){
+            for(int i = 2; i < 4; i++)
+                for(int j = 0; j < 2; j++){
+                    setDarkBlue(i, j);
+                    setRedGreen(i, j);
+                }
+        }else if((indexJ >= 0 && indexJ <= 1) && (indexI >= 2 && indexI <= 3)){
+            for(int i = 0; i < 2; i++)
+                for(int j = 2; j < 4; j++){
+                    setDarkBlue(i, j);
+                    setRedGreen(i, j);
+                }
+        }else if((indexJ >= 2 && indexJ <= 3) && (indexI >= 2 && indexI <= 3)){
+            for(int i = 2; i < 4; i++)
+                for(int j = 2; j < 4; j++){
+                    setDarkBlue(i, j);
+                    setRedGreen(i, j);
+                }
+        }
+    break;
+    case 9:
+        int tempJ = 0;
+        int tempI = 0;
+        if((indexJ == 0 || indexJ == 3 || indexJ == 6)){
+            tempJ = indexJ;
+            if(indexI == 0 || indexI == 3 || indexI == 6)
+            tempI = indexI;
+            if(indexI == 1 || indexI == 4 || indexI == 7)
+            tempI = indexI - 1;
+            if(indexI == 2 || indexI == 5 || indexI == 8)
+            tempI = indexI - 2;
+        }
+        if((indexJ == 1 || indexJ == 4 || indexJ == 7)){
+            tempJ = indexJ - 1;
+            if(indexI == 0 || indexI == 3 || indexI == 6)
+            tempI = indexI;
+            if(indexI == 1 || indexI == 4 || indexI == 7)
+            tempI = indexI - 1;
+            if(indexI == 2 || indexI == 5 || indexI == 8)
+            tempI = indexI - 2;
+        }
+        if((indexJ == 2 || indexJ == 5 || indexJ == 8)){
+            tempJ = indexJ - 2;
+            if(indexI == 0 || indexI == 3 || indexI == 6)
+            tempI = indexI;
+            if(indexI == 1 || indexI == 4 || indexI == 7)
+            tempI = indexI - 1;
+            if(indexI == 2 || indexI == 5 || indexI == 8)
+            tempI = indexI - 2;
+        }
+        for(int i = tempI; i < tempI + 3; i++)
+            for(int j = tempJ; j < tempJ + 3; j++){
+                setDarkBlue(j, i);
+                setRedGreen(j, i);
             }
-    }else if((indexJ >= 2 && indexJ <= 3) && (indexI >= 0 && indexI <= 1)){
-        for(int i = 2; i < 4; i++)
-            for(int j = 0; j < 2; j++){
-                setDarkBlue(i, j);
-                setRedGreen(i, j);
-            }
-    }else if((indexJ >= 0 && indexJ <= 1) && (indexI >= 2 && indexI <= 3)){
-        for(int i = 0; i < 2; i++)
-            for(int j = 2; j < 4; j++){
-                setDarkBlue(i, j);
-                setRedGreen(i, j);
-            }
-    }else if((indexJ >= 2 && indexJ <= 3) && (indexI >= 2 && indexI <= 3)){
-        for(int i = 2; i < 4; i++)
-            for(int j = 2; j < 4; j++){
-                setDarkBlue(i, j);
-                setRedGreen(i, j);
-            }
-    }
+    break;
+    } // end switch
 }
+
 
 void Board::setRedGreen(int i, int j){
     if(vector[i][j] == 1)
