@@ -50,7 +50,9 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     ui->eraseButton->setIcon(QIcon(":/images/eraser.png"));
     ui->eraseButton->setIconSize(QSize(60,60));
     ui->eraseButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;}");
+    connect(ui->eraseButton, &QPushButton::clicked, this, &MainWindow::eraseButtonClicked);
     connect(this, &MainWindow::sendErase, &model, &Model::receiveErase);
+    //connect(this, &MainWindow::reverseRedBoard, board, &Board::setBackColor);
 
     /* Undo Button */
     ui->undoButton->setIcon(QIcon(":/images/undo.png"));
@@ -174,15 +176,20 @@ void MainWindow::receiveCells(QVector<QVector<QLabel *>> cells_)
  * When click the erase button, remove the current selected number.
  * If nothing has been selected, click this button won't work
  */
-void MainWindow::on_eraseButton_clicked()
+void MainWindow::eraseButtonClicked()
 {
+    qDebug() << "cells[indexJ][indexI]->isEnabled()";
     if(indexI != -1 && indexJ != -1)
     {
+        qDebug() << cells[indexJ][indexI]->isEnabled();
         if(cells[indexJ][indexI]->isEnabled())
         {
+
             emit sendErase(indexJ, indexI);
 
             cells[indexJ][indexI]->setText("");
+
+            emit reverseRedBoard(indexJ, indexI);
         }
     }
 }

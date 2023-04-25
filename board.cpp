@@ -157,3 +157,10 @@ void Board::setRedGreen(int i, int j){
     if(vector[i][j] == 2)
         cells[i][j]->setStyleSheet("QLabel { background-color : rgba(46, 90, 154, 0.26); color: red;}");
 }
+
+//void Board::setBackColor(int i, int j){
+//    QPalette curCell = cells[i][j]->palette();
+//    if(curCell.color(QPalette::Window) == QColor(46, 90, 154, 0.26)){
+//        qDebug() << "what";
+//    }
+//}

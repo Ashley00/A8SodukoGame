@@ -27,6 +27,9 @@ public:
     void setRedGreen(int, int);
     void setLightBlue(int, int);
     void setDarkBlue(int, int);
+
+    //void setBackColor(int, int);
+
     ~Board();
 
 public slots:

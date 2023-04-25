@@ -89,5 +89,5 @@ void Model::receiveErase(int indexI, int indexJ)
 {
     displayVector[indexI][indexJ] = 0;
     currentVector[indexI][indexJ] = 0;
-    //qDebug() << "display" << displayVector[indexI][indexJ] << "current" << currentVector[indexI][indexJ];
+    qDebug() << "display" << displayVector[indexI][indexJ] << "current" << currentVector[indexI][indexJ];
 }
