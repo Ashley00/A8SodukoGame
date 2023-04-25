@@ -32,9 +32,9 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     ui->exitButton->setIconSize(QSize(160,80));
 
     // signal slot connections
-    connect(this, MainWindow::initializeTutorial, &tutorialWindow, Tutorial::initializeTutorial);
-    connect(&tutorialWindow, Tutorial::goToMenuPage, this, MainWindow::showMenuPage);
-    connect(gameWindow, Game::goToMenuPage, this, MainWindow::showMenuPage);
+    connect(this, &MainWindow::initializeTutorial, &tutorialWindow, &Tutorial::initializeTutorial);
+    connect(&tutorialWindow, &Tutorial::goToMenuPage, this, &MainWindow::showMenuPage);
+    connect(gameWindow, &Game::goToMenuPage, this, &MainWindow::showMenuPage);
 
 }
 
