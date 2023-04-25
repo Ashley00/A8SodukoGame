@@ -188,8 +188,9 @@ void MainWindow::eraseButtonClicked()
             emit sendErase(indexJ, indexI);
 
             cells[indexJ][indexI]->setText("");
+            sendSetVector(indexJ,indexI,0);
 
-            emit reverseRedBoard(indexJ, indexI);
+//            emit reverseRedBoard(indexJ, indexI);
         }
     }
 }

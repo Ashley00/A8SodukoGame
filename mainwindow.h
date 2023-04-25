@@ -28,7 +28,7 @@ signals:
     void sendPuzzleInput(int, int, int);
     void sendErase(int, int);
 
-    void reverseRedBoard(int, int);
+//    void reverseRedBoard(int, int);
 
     void sendInitBoard(int, std::vector<std::vector<int>>);
     void sendInitNumbers(int);
