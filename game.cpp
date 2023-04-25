@@ -7,13 +7,6 @@ Game::Game(Model& model, QWidget *parent) :
 {
     ui->setupUi(this);
 
-//    // set game page background
-//    QPixmap background(":/images/full.png");
-//    background = background.scaled(this->size(), Qt::IgnoreAspectRatio);
-//    QPalette palette;
-//    palette.setBrush(QPalette::Window, background);
-//    this->setPalette(palette);
-
     ui->winGame->setVisible(false);
 
     // initialize index with -1
@@ -41,12 +34,7 @@ Game::Game(Model& model, QWidget *parent) :
     connect(gameOver, &GameOverDialog::sendNewGame, this, &Game::receiveNewGame);
     connect(gameOver, &GameOverDialog::sendTutorial, this, &Game::receiveTutorial);
 
-    level = 4;
-
-    vector = {{0,0,0,0},
-              {0,0,0,0},
-              {0,0,0,0},
-              {0,0,0,0}};
+    level = 0;
 
     /* Erase Button */
     ui->eraseButton->setIcon(QIcon(":/images/eraser.png"));
@@ -74,10 +62,10 @@ Game::Game(Model& model, QWidget *parent) :
     connect(&model, &Model::sendCorrectInput, this, &Game::receiveCorrectInput);
     connect(&model, &Model::sendIncorrectInput, this, &Game::receiveIncorrectInput);
     connect(&model, &Model::sendWonGame, this, &Game::receiveWonGame);
+    connect(&model, &Model::sendDispplayVector, this, &Game::receiveDisplayVector);
+    /* Send Init Model */
+     connect(this, &Game::sendInitModel, &model, &Model::receiveInitModel);
 
-
-    emit(sendInitBoard(level, model.displayVector));
-    emit(sendInitNumbers(level));
 }
 
 Game::~Game()
@@ -117,15 +105,9 @@ void Game::receiveCorrectInput(int input, int indexJ, int indexI)
 
 void Game::receiveIncorrectInput(int input, int indexJ, int indexI)
 {
-    qDebug() << "Input: " << input;
     mistakes++;
-    qDebug() << "IndexJ: " << indexJ;
-    qDebug() << "IndexI: " << indexI;
     cells[indexJ][indexI]->setStyleSheet("QLabel {background-color : rgba(173, 216, 230, 128); color: red;}");
-    qDebug() << "Reached Here ";
-    qDebug() << "Numbers size " << numbers.size();
     cells[indexJ][indexI]->setText(numbers[input - 1]->text());
-
     vector[indexJ][indexI] = 2;
     emit sendSetVector(indexJ,indexI,2);
     ui->mistakesLabel->setText(QString("Mistakes: %1/5").arg(mistakes));
@@ -191,8 +173,6 @@ void Game::eraseButtonClicked()
 
             cells[indexJ][indexI]->setText("");
             sendSetVector(indexJ,indexI,0);
-
-//            emit reverseRedBoard(indexJ, indexI);
         }
     }
 }
@@ -201,5 +181,27 @@ void Game::on_backButton_clicked()
 {
     this->hide();
     emit goToMenuPage();
+}
+
+void Game::receiveLevel4(int level_)
+{
+    level = level_;
+    vector =  std::vector<std::vector<int>>(level, std::vector<int>(level, 0));
+    emit(sendInitModel(4));
+    this->show();
+}
+
+void Game::receiveLevel9(int level_)
+{
+    level = level_;
+    vector =  std::vector<std::vector<int>>(level, std::vector<int>(level, 0));
+    emit(sendInitModel(9));
+    this->show();
+}
+
+void Game::receiveDisplayVector(std::vector<std::vector<int>> dv)
+{
+     emit(sendInitBoard(level, dv));
+     emit(sendInitNumbers(level));
 }
 

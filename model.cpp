@@ -8,29 +8,11 @@
 Model::Model(QObject *parent)
     : QObject{parent}
 {
-    // initialize with 4*4 Sudoku game
-    level = 4;
-    displayVector = {{2,1,0,0},
-                     {0,3,2,0},
-                     {0,0,0,4},
-                     {1,0,0,0}};
-    prefixVector = {{2,1,0,0},
-                     {0,3,2,0},
-                     {0,0,0,4},
-                     {1,0,0,0}};
-    solutionVector = {{2,1,4,3},
-                      {4,3,2,1},
-                      {3,2,1,4},
-                      {1,4,3,2}};
-    currentVector = displayVector;
-    
-    generateGame(level);
+
 }
 
 void Model::receivePuzzleInput(int input, int indexJ, int indexI)
 {
-    qDebug() << "User input received...:";
-    qDebug() << "Input number: " << input << " indexJ: " << indexJ << " indexI: " << indexI;
      /* Check to see if input is correct */
      if(solutionVector[indexJ][indexI] == input){
          currentVector[indexJ][indexI] = input;
@@ -143,5 +125,13 @@ void Model::receiveErase(int indexI, int indexJ)
     displayVector[indexI][indexJ] = 0;
     currentVector[indexI][indexJ] = 0;
     //qDebug() << "display" << displayVector[indexI][indexJ] << "current" << currentVector[indexI][indexJ];
+}
+
+void Model::receiveInitModel(int level_)
+{
+    // initialize with 4*4 Sudoku game
+    level = level_;
+    generateGame(level);
+    emit(sendDispplayVector(displayVector));
 }
 

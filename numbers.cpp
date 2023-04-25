@@ -14,21 +14,15 @@ void Numbers::mousePressEvent(QMouseEvent *event)
 
     int x = event->pos().x();
     int y = event->pos().y();
-    for(int i = 0; i < 4; i++){
+    for(int i = 0; i < level; i++){
             QLabel *currLabel = numbers[i];
             int width = currLabel->width();
-           // qInfo() << "label width: " << width;
             int height = currLabel->height();
-          //  qInfo() << "label height: " << height;
             int labelX = currLabel->x();
-          //  qInfo() << "label X POS: " << labelX;
             int labelY = currLabel->y();
-          //  qInfo() << "label Y POS: " << labelY;
 
             if((x >= labelX) && (x <= labelX + width) && (y >= labelY) && (y <= labelY + height)){
-               // qInfo() << "Reached here " ;
                 QString num = currLabel->text();
-               //  qInfo() << "Sending Numer: " << num << " to main window";
                 emit(sendNumberClicked(num));
 
             }
@@ -42,6 +36,7 @@ Numbers::~Numbers()
 
 void Numbers::receiveInitNumbers(int level_)
 {
+    numbers.clear();
     int x = 0;
     int y = 90;
     level = level_;
@@ -67,7 +62,6 @@ void Numbers::receiveInitNumbers(int level_)
         else if(level == 9){
             QLabel *numberLabel = new QLabel(this);
             numberLabel->setFrameStyle(QFrame::Box);
-           // numberLayout->addWidget(numberLabel, 0, i);
             QFont font("Arial", 20);
             numberLabel->setStyleSheet("QLabel {border-radius: 0px; border: 1px solid black}");
             numberLabel->setGeometry(x, y, 80, 80);

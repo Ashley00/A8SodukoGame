@@ -34,8 +34,8 @@ signals:
     void sendInitBoard(int, std::vector<std::vector<int>>);
     void sendInitNumbers(int);
     void sendSetVector(int,int,int);
-
     void goToMenuPage();
+     void sendInitModel(int);
 
 private slots:
     void receiveBoxSelected(int, int);
@@ -49,8 +49,13 @@ private slots:
     void receiveTutorial();
     void receiveCells(QVector<QVector<QLabel *>>);
     void eraseButtonClicked();
-
     void on_backButton_clicked();
+
+public slots:
+    void receiveLevel4(int);
+    void receiveLevel9(int);
+    void receiveDisplayVector(std::vector<std::vector<int>>);
+
 
 private:
     Ui::Game *ui;

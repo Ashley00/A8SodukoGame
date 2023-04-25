@@ -36,6 +36,11 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     connect(&tutorialWindow, &Tutorial::goToMenuPage, this, &MainWindow::showMenuPage);
     connect(gameWindow, &Game::goToMenuPage, this, &MainWindow::showMenuPage);
 
+    /* Easy Button */
+     connect(this, &MainWindow::sendEasyButton, gameWindow, &Game::receiveLevel4);
+     connect(this, &MainWindow::sendHardButton, gameWindow, &Game::receiveLevel9);
+
+
 }
 
 /**
@@ -72,7 +77,8 @@ void MainWindow::on_exitButton_clicked()
  */
 void MainWindow::showMenuPage()
 {
-    this->show();
+    qApp->quit();
+    QProcess::startDetached(qApp->arguments()[0], qApp->arguments());
 }
 
 /**
@@ -82,6 +88,13 @@ void MainWindow::showMenuPage()
 void MainWindow::on_easyButton_clicked()
 {
     this->hide();
-    gameWindow->show();
+    emit(sendEasyButton(4));
+}
+
+
+void MainWindow::on_hardButton_clicked()
+{
+    this->hide();
+    emit(sendHardButton(9));
 }
 

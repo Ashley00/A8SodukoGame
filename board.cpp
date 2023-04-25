@@ -10,16 +10,15 @@ Board::Board(QWidget *parent) :
     ui->setupUi(this);
     ui->lines9x9->setVisible(false);
     ui->lines4x4->setVisible(false);
-    
-    level = 9;
-    showLines();
-    vector = std::vector<std::vector<int>>(level, std::vector<int>(level, 0));
+    level = 0;
+
 }
 
-void Board::receiveBoard(int level, std::vector<std::vector<int>> displayVector)
+void Board::receiveBoard(int level_, std::vector<std::vector<int>> displayVector)
 {
-    level = 4;
-
+    level = level_;
+    vector = std::vector<std::vector<int>>(level, std::vector<int>(level, 0));
+    showLines();
     /* Sudoku Board Widget */
     QGridLayout *gridLayout = new QGridLayout(this);
     gridLayout->setSpacing(0);

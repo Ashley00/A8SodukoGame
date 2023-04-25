@@ -27,12 +27,14 @@ signals:
     void sendCorrectInput(int, int, int);
     void sendIncorrectInput(int, int, int);
     void sendWonGame();
+    void sendDispplayVector(std::vector<std::vector<int>>);
 
 public slots:
     void changeLevel(int level);
     void generator();
     void receivePuzzleInput(int, int, int);
     void receiveErase(int, int);
+    void receiveInitModel(int);
 
 };
 

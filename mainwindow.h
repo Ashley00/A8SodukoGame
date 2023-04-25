@@ -19,13 +19,15 @@ public:
     ~MainWindow();
 signals:
     void initializeTutorial();
+    void sendEasyButton(int);
+     void sendHardButton(int);
 
 private slots:
     void showMenuPage();
     void on_tutorialButton_clicked();
     void on_exitButton_clicked();
-
     void on_easyButton_clicked();
+    void on_hardButton_clicked();
 
 private:
     Ui::MainWindow *ui;
