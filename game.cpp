@@ -95,7 +95,6 @@ void Game::receiveNumberClicked(QString num)
 
 void Game::receiveCorrectInput(int input, int indexJ, int indexI)
 {
-    qDebug() << "Correct Input Received!";
     //background-color is light blue which highlight the current box, and set the correct number to green
     cells[indexJ][indexI]->setStyleSheet("QLabel {background-color : rgba(173, 216, 230, 128); color: rgba(0, 165, 11, 1);}");
     cells[indexJ][indexI]->setText(numbers[input - 1]->text());
@@ -123,16 +122,13 @@ void Game::receiveIncorrectInput(int input, int indexJ, int indexI)
  */
 void Game::receiveWonGame()
 {
-    qDebug() << "Game Won!";
     ui->winGame->setVisible(true);
 
 }
 
 void Game::receiveSecondChace()
 {
-    qDebug() << "Mistakes before second chance: " << mistakes;
     mistakes--;
-    qDebug() << "Mistakes after second chance: " << mistakes;
     ui->mistakesLabel->setText(QString("Mistakes: %1/5").arg(mistakes));
     gameOver->setVisible(false);
 
