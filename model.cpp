@@ -1,5 +1,6 @@
 #include "model.h"
 #include <QDebug>
+#include <algorithm>
 
 /**
  * @brief Model::Model Constructor
@@ -11,20 +12,217 @@ Model::Model(QObject *parent)
 
 }
 
-void Model::receivePuzzleInput(int input, int indexJ, int indexI)
+//wjw
+void Model::receivePuzzleInput(int input, int indexJ, int indexI, int level, bool checkall)
 {
-     /* Check to see if input is correct */
-     if(solutionVector[indexJ][indexI] == input){
-         currentVector[indexJ][indexI] = input;
-         if(currentVector == solutionVector){
-             emit sendCorrectInput(input, indexJ, indexI);
-             emit sendWonGame();
-         }else{
-             emit sendCorrectInput(input, indexJ, indexI);
-         }
-     }else{
-         emit sendIncorrectInput(input, indexJ, indexI);
-     }
+    std::vector<int> numInRow;
+    std::vector<int> numInCol;
+    std::vector<int> numInBox4;
+
+    std::vector<int> possibleNumInRow = generateNumVector(level);
+    std::vector<int> possibleNumInCol = generateNumVector(level);
+    std::vector<int> possibleNumInBox = generateNumVector(level);
+
+    //loop through indexJ row
+    for(int c = 0; c < level; c++){
+        if(currentVector[indexJ][c] != 0 && c != indexI){
+            numInRow.push_back(currentVector[indexJ][c]);
+            possibleNumInRow.erase(std::remove(
+                                        possibleNumInRow.begin(),
+                                        possibleNumInRow.end(),
+                                        currentVector[indexJ][c]),
+                                        possibleNumInRow.end());
+        }
+    }
+    //loop through indexI col
+    for(int r = 0; r < level; r++){
+        if(currentVector[r][indexI] != 0 && r != indexJ){
+            numInCol.push_back(currentVector[r][indexI]);
+            possibleNumInCol.erase(std::remove(
+                                        possibleNumInCol.begin(),
+                                        possibleNumInCol.end(),
+                                        currentVector[r][indexI]),
+                                        possibleNumInCol.end());
+        }
+    }
+    //loop through the box that contains selected index
+    if(level == 4){
+        numInBox4 = sameNumInBox4(indexJ, indexI);
+        for(int i = 0; i < numInBox4.size(); i++){
+            possibleNumInBox.erase(std::remove(
+                                        possibleNumInBox.begin(),
+                                        possibleNumInBox.end(),
+                                        numInBox4.at(i)),
+                                        possibleNumInBox.end());
+        }
+    }else if(level == 9){
+
+    }
+
+    //emit send6Vectors(numInRow, possibleNumInRow, numInCol, possibleNumInCol, numInBox4, possibleNumInBox);
+
+    std::vector commonNumVec = findSameNumsInVectors(possibleNumInRow, possibleNumInCol, possibleNumInBox);
+
+    bool inputIsPossible = std::find(commonNumVec.begin(), commonNumVec.end(), input) != commonNumVec.end();
+
+    if(!checkall)
+        currentVector[indexJ][indexI] = input;
+//    else{
+//        if(indexJ == 3 && indexI == 3 && input == 4)
+//            int a = 0;
+//    }
+
+    if(inputIsPossible){
+        //currentVector[indexJ][indexI] = input;
+        if(currentVector == solutionVector){
+            emit sendCorrectInput(input, indexJ, indexI);
+            emit sendWonGame();
+        }
+        emit sendCorrectInput(input, indexJ, indexI);
+    }else{
+        emit sendIncorrectInput(input, indexJ, indexI);
+    }
+}
+
+//wjw
+void Model::get7Vectors(int indexJ, int indexI, int _level){
+    std::vector<int> numInRow;
+    std::vector<int> numInCol;
+    std::vector<int> numInBox4;
+
+    std::vector<int> possibleNumInRow = generateNumVector(level);
+    std::vector<int> possibleNumInCol = generateNumVector(level);
+    std::vector<int> possibleNumInBox = generateNumVector(level);
+
+    //loop through indexJ row
+    for(int c = 0; c < level; c++){
+        if(currentVector[indexJ][c] != 0 && c != indexI){
+            numInRow.push_back(currentVector[indexJ][c]);
+            possibleNumInRow.erase(std::remove(
+                                        possibleNumInRow.begin(),
+                                        possibleNumInRow.end(),
+                                        currentVector[indexJ][c]),
+                                        possibleNumInRow.end());
+        }
+    }
+    //loop through indexI col
+    for(int r = 0; r < level; r++){
+        if(currentVector[r][indexI] != 0 && r != indexJ){
+            numInCol.push_back(currentVector[r][indexI]);
+            possibleNumInCol.erase(std::remove(
+                                        possibleNumInCol.begin(),
+                                        possibleNumInCol.end(),
+                                        currentVector[r][indexI]),
+                                        possibleNumInCol.end());
+        }
+    }
+    //loop through the box that contains selected index
+    if(_level == 4){
+        numInBox4 = sameNumInBox4(indexJ, indexI);
+        for(int i = 0; i < numInBox4.size(); i++){
+            possibleNumInBox.erase(std::remove(
+                                        possibleNumInBox.begin(),
+                                        possibleNumInBox.end(),
+                                        numInBox4.at(i)),
+                                        possibleNumInBox.end());
+        }
+    }else if(_level == 9){
+
+    }
+
+    std::vector commonNumVec = findSameNumsInVectors(possibleNumInRow, possibleNumInCol, possibleNumInBox);
+
+    bool isFixedNum = false;
+    if(displayVector[indexJ][indexI] != 0 || currentVector[indexJ][indexI] != 0){
+        isFixedNum = true;
+    }
+
+    emit sendVectorsAndIndex(indexJ, indexI,
+                             numInRow, possibleNumInRow,
+                             numInCol, possibleNumInCol,
+                             numInBox4, possibleNumInBox,
+                             commonNumVec, isFixedNum);
+
+}
+
+//wjw
+/**
+ * @brief Model::generateNumVector
+ * Generate a vector that contains 1 to given number
+ * @param totalNum
+ * @return
+ */
+std::vector<int> Model::generateNumVector(int totalNum) {
+    std::vector<int> vec;
+      for (int i = 1; i <= totalNum; i++) {
+        vec.push_back(i);
+      }
+      return vec;
+  }
+
+//wjw
+/**
+ * @brief Model::findSameNumsInVectors
+ * Helper method that finds common numbers in three vectors
+ * @param v1
+ * @param v2
+ * @return
+ */
+std::vector<int> Model::findSameNumsInVectors(std::vector<int> v1, std::vector<int> v2, std::vector<int> v3){
+    std::vector<int> tempVec;
+    std::sort(v1.begin(), v1.end());
+    std::sort(v2.begin(), v2.end());
+    std::sort(v3.begin(), v3.end());
+    std::set_intersection(v1.begin(), v1.end(), v2.begin(), v2.end(), std::back_inserter(tempVec));
+    std::vector<int> sameNumVector;
+    std::set_intersection(tempVec.begin(), tempVec.end(), v3.begin(), v3.end(), std::back_inserter(sameNumVector));
+    return sameNumVector;
+}
+
+//wjw
+/**
+ * @brief Model::sameNumInBox4
+ * In 4*4 sudoku, get all filled numbers in 2*2 box that contains selected cell
+ * @param r
+ * @param c
+ * @return
+ */
+std::vector<int> Model::sameNumInBox4(int r, int c){
+    std::vector<int> resultVec;
+    if((r>=0 && r<2) && (c>=0 && c<2)){
+        for(int x = 0; x < 2; x++){
+            for(int y = 0; y < 2; y++){
+                if(currentVector[x][y] != 0 && x != r && y != c){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else if((r>=0 && r<2) && (c>=2 && c<4)){
+        for(int x = 0; x < 2; x++){
+            for(int y = 2; y < 4; y++){
+                if(currentVector[x][y] != 0 && x != r && y != c){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else if((r>=2 && r<4) && (c>=0 && c<2)){
+        for(int x = 2; x < 4; x++){
+            for(int y = 0; y < 2; y++){
+                if(currentVector[x][y] != 0 && x != r && y != c){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else{
+        for(int x = 2; x < 4; x++){
+            for(int y = 2; y < 4; y++){
+                if(currentVector[x][y] != 0 && x != r && y != c){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }
+    return resultVec;
 }
 
 /**
