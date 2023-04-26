@@ -27,7 +27,6 @@ void Model::receivePuzzleInput(int input, int indexJ, int indexI)
      }
 }
 
-
 /**
  * @brief Model::changeLevel
  * Change the sudoku game level, level can be in 4*4, 6*6, 9*9
@@ -132,6 +131,26 @@ void Model::receiveInitModel(int level_)
     // initialize with 4*4 Sudoku game
     level = level_;
     generateGame(level);
+    emit(sendDispplayVector(displayVector));
+}
+
+void Model::receiveInitExampleModel(int level_)
+{
+    // initialize with 4*4 Sudoku game
+    level = level_;
+    displayVector = {{2,1,0,0},
+                     {0,3,2,0},
+                     {0,0,0,4},
+                     {1,0,0,0}};
+    prefixVector = {{2,1,0,0},
+                     {0,3,2,0},
+                     {0,0,0,4},
+                     {1,0,0,0}};
+    solutionVector = {{2,1,4,3},
+                      {4,3,2,1},
+                      {3,2,1,4},
+                      {1,4,3,2}};
+    currentVector = displayVector;
     emit(sendDispplayVector(displayVector));
 }
 

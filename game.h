@@ -35,7 +35,8 @@ signals:
     void sendInitNumbers(int);
     void sendSetVector(int,int,int);
     void goToMenuPage();
-     void sendInitModel(int);
+    void sendInitModel(int);
+    void sendInitExampleModel(int);
 
 private slots:
     void receiveBoxSelected(int, int);
@@ -54,6 +55,7 @@ private slots:
 public slots:
     void receiveLevel4(int);
     void receiveLevel9(int);
+    void receiveLevelExample(int);
     void receiveDisplayVector(std::vector<std::vector<int>>);
 
 

@@ -20,7 +20,8 @@ public:
 signals:
     void initializeTutorial();
     void sendEasyButton(int);
-     void sendHardButton(int);
+    void sendHardButton(int);
+    void sendExampleButton(int);
 
 private slots:
     void showMenuPage();
@@ -28,6 +29,7 @@ private slots:
     void on_exitButton_clicked();
     void on_easyButton_clicked();
     void on_hardButton_clicked();
+    void onExampleButtonClicked();
 
 private:
     Ui::MainWindow *ui;

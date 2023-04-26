@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
+#include "tutorial.h"
 
 /**
  * @brief MainWindow::MainWindow Constructor
@@ -39,6 +40,9 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     /* Easy Button */
      connect(this, &MainWindow::sendEasyButton, gameWindow, &Game::receiveLevel4);
      connect(this, &MainWindow::sendHardButton, gameWindow, &Game::receiveLevel9);
+     connect(this, &MainWindow::sendExampleButton, gameWindow, &Game::receiveLevelExample);
+     connect(&tutorialWindow, &Tutorial::sendExampleButtonClicked, this, &MainWindow::onExampleButtonClicked);
+
 
 
 }
@@ -96,5 +100,11 @@ void MainWindow::on_hardButton_clicked()
 {
     this->hide();
     emit(sendHardButton(9));
+}
+
+void MainWindow::onExampleButtonClicked()
+{
+    this->hide();
+    emit(sendExampleButton(4));
 }
 

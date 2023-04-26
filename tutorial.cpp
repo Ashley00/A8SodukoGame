@@ -10,7 +10,7 @@ Tutorial::Tutorial(QWidget *parent) :
     ui(new Ui::Tutorial)
 {
     ui->setupUi(this);
-
+    ui->exampleButton->setVisible(false);
     // set tutorial page background
     QPixmap background(":/images/full.png");
     background = background.scaled(this->size(), Qt::IgnoreAspectRatio);
@@ -31,6 +31,9 @@ Tutorial::Tutorial(QWidget *parent) :
     ui->leftButton->setEnabled(false);
     currentSlide = 0;
     ui->slidesLabel->setPixmap(slides.at(currentSlide));
+
+    /* Buttons */
+    connect(ui->exampleButton, &QPushButton::clicked, this, &Tutorial::onExampleButtonClicked);
 
 }
 
@@ -78,6 +81,7 @@ void Tutorial::on_rightButton_clicked()
     }
     if(currentSlide+1 == totalSlides){
         ui->rightButton->setEnabled(false);
+        ui->exampleButton->setVisible(true);
     }
 }
 
@@ -97,5 +101,10 @@ void Tutorial::on_leftButton_clicked()
     if(currentSlide == 0){
         ui->leftButton->setEnabled(false);
     }
+}
+
+void Tutorial::onExampleButtonClicked()
+{
+    emit(sendExampleButtonClicked());
 }
 

@@ -21,12 +21,14 @@ public:
 
 signals:
     void goToMenuPage();
+    void sendExampleButtonClicked();
 
 public slots:
     void initializeTutorial();
     void on_backButton_clicked();
     void on_rightButton_clicked();
     void on_leftButton_clicked();
+    void onExampleButtonClicked();
 
 private:
     Ui::Tutorial *ui;

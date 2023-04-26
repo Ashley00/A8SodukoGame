@@ -132,6 +132,19 @@
     </size>
    </property>
   </widget>
+  <widget class="QPushButton" name="exampleButton">
+   <property name="geometry">
+    <rect>
+     <x>550</x>
+     <y>140</y>
+     <width>84</width>
+     <height>61</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Play!</string>
+   </property>
+  </widget>
  </widget>
  <resources>
   <include location="images.qrc"/>

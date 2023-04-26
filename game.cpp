@@ -65,6 +65,7 @@ Game::Game(Model& model, QWidget *parent) :
     connect(&model, &Model::sendDispplayVector, this, &Game::receiveDisplayVector);
     /* Send Init Model */
      connect(this, &Game::sendInitModel, &model, &Model::receiveInitModel);
+     connect(this, &Game::sendInitExampleModel, &model, &Model::receiveInitExampleModel);
 
 }
 
@@ -192,6 +193,14 @@ void Game::receiveLevel9(int level_)
     level = level_;
     vector =  std::vector<std::vector<int>>(level, std::vector<int>(level, 0));
     emit(sendInitModel(9));
+    this->show();
+}
+
+void Game::receiveLevelExample(int level_)
+{
+    level = level_;
+    vector =  std::vector<std::vector<int>>(level, std::vector<int>(level, 0));
+    emit(sendInitExampleModel(4));
     this->show();
 }
 

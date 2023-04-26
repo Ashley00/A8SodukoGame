@@ -35,6 +35,7 @@ public slots:
     void receivePuzzleInput(int, int, int);
     void receiveErase(int, int);
     void receiveInitModel(int);
+    void receiveInitExampleModel(int);
 
 };
 
