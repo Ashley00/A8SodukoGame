@@ -101,32 +101,6 @@
     <string>Mistakes: 0/</string>
    </property>
   </widget>
-  <widget class="QPushButton" name="backButton">
-   <property name="geometry">
-    <rect>
-     <x>90</x>
-     <y>410</y>
-     <width>121</width>
-     <height>51</height>
-    </rect>
-   </property>
-   <property name="cursor">
-    <cursorShape>PointingHandCursor</cursorShape>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="icon">
-    <iconset resource="images.qrc">
-     <normaloff>:/images/back.png</normaloff>:/images/back.png</iconset>
-   </property>
-   <property name="iconSize">
-    <size>
-     <width>121</width>
-     <height>60</height>
-    </size>
-   </property>
-  </widget>
   <widget class="SceneWidget" name="box2DWidget" native="true">
    <property name="geometry">
     <rect>
@@ -154,6 +128,45 @@
    </property>
    <property name="styleSheet">
     <string notr="true">background-color: rgb(255, 212, 248)</string>
+   </property>
+  </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>20</x>
+     <y>60</y>
+     <width>271</width>
+     <height>361</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>TextLabel</string>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="backButton">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>440</y>
+     <width>121</width>
+     <height>51</height>
+    </rect>
+   </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
+   <property name="text">
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/back.png</normaloff>:/images/back.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>121</width>
+     <height>60</height>
+    </size>
    </property>
   </widget>
  </widget>
