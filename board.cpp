@@ -74,7 +74,7 @@ void Board::mousePressEvent(QMouseEvent *event)
                 highlightCurrentRow(j);
                 highlightCurrentCol(i);
                 setLightBlue(j, i);
-                emit(sendBoxSelected(j, i));
+                emit(sendBoxSelected(j, i, level));
             }
         }
     }
