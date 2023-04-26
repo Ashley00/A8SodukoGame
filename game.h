@@ -28,7 +28,7 @@ public:
     ~Game();
 
 signals:
-    void sendPuzzleInput(int, int, int);
+    void sendPuzzleInput(int, int, int, int, bool);
     void sendErase(int, int);
 
 //    void reverseRedBoard(int, int);
@@ -42,7 +42,14 @@ signals:
     void triggerBox2D();
 
 private slots:
-    void receiveBoxSelected(int, int);
+     //wjw
+    void receiveBoxSelected(int, int,
+                            std::vector<int>, std::vector<int>,
+                            std::vector<int>, std::vector<int>,
+                            std::vector<int>, std::vector<int>,
+                            std::vector<int>, bool);
+    //wjw
+
     void receiveNumbers(QVector<QLabel *>);
     void receiveNumberClicked(QString);
     void receiveCorrectInput(int, int, int);
@@ -78,6 +85,10 @@ private:
     int level;
 
     std::vector<std::vector<int>> vector;
+    bool isExampleMode;
+
+    std::vector<int> numbersDisable;
+
 
 };
 
