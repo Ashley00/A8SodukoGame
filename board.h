@@ -38,7 +38,7 @@ public slots:
 
 signals:
     void sendCells(QVector<QVector<QLabel *>>);
-     void sendBoxSelected(int, int);
+     void sendBoxSelected(int, int, int);
 private:
     Ui::Board *ui;
     QVector<QVector<QLabel *>> cells;
