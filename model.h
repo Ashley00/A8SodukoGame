@@ -23,19 +23,39 @@ public:
     
     void generateGame(int);
 
+
+    std::vector<int> generateNumVector(int);
+    std::vector<int> findSameNumsInVectors(std::vector<int>, std::vector<int>, std::vector<int>);
+    std::vector<int> sameNumInBox4(int, int);
+
+
 signals:
     void sendCorrectInput(int, int, int);
     void sendIncorrectInput(int, int, int);
     void sendWonGame();
     void sendDispplayVector(std::vector<std::vector<int>>);
 
+    //wjw
+    void sendVectorsAndIndex(int, int,
+                             std::vector<int>, std::vector<int>,
+                             std::vector<int>, std::vector<int>,
+                             std::vector<int>, std::vector<int>,
+                             std::vector<int>, bool);
+
 public slots:
     void changeLevel(int level);
     void generator();
-    void receivePuzzleInput(int, int, int);
+
+    //wjw
+    void receivePuzzleInput(int, int, int, int, bool);
+    //wjw
+
     void receiveErase(int, int);
     void receiveInitModel(int);
     void receiveInitExampleModel(int);
+
+    //wjw
+    void get7Vectors(int, int, int);
 
 };
 
