@@ -10,6 +10,8 @@
 #include <QProcess>
 #include "model.h"
 #include "numbers.h"
+#include "scenewidget.h"
+#include "gamewondialog.h"
 #include "board.h"
 #include "gameoverdialog.h"
 
@@ -37,6 +39,7 @@ signals:
     void goToMenuPage();
     void sendInitModel(int);
     void sendInitExampleModel(int);
+    void triggerBox2D();
 
 private slots:
     void receiveBoxSelected(int, int);
@@ -64,6 +67,8 @@ private:
     QVector<QVector<QLabel *>> cells;
     QVector<QLabel* > numbers;
     GameOverDialog *gameOver;
+    gamewondialog *gameWon;
+    SceneWidget* box2D;
     Board *board;
     Numbers *numbersWidget;
     int indexJ;

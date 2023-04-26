@@ -1,5 +1,6 @@
 #include "game.h"
 #include "ui_game.h"
+#include "scenewidget.h"
 
 Game::Game(Model& model, QWidget *parent) :
     QWidget(parent),
@@ -7,13 +8,13 @@ Game::Game(Model& model, QWidget *parent) :
 {
     ui->setupUi(this);
 
-    ui->winGame->setVisible(false);
 
+   // box2D->hide();
     // initialize index with -1
     indexI = -1;
     indexJ = -1;
     mistakes = 0;
-
+    ui->box2DWidget->hide();
     /* Board Widget */
     board = new Board(ui->boardWidget);
     connect(this, &Game::sendInitBoard, board, &Board::receiveBoard);
@@ -27,6 +28,11 @@ Game::Game(Model& model, QWidget *parent) :
     connect(numbersWidget, &Numbers::sendNumberClicked, this, &Game::receiveNumberClicked);
     connect(numbersWidget, &Numbers::sendNumbers, this, &Game::receiveNumbers);
     numbersWidget->setVisible(true);
+
+    /* Game Won Widget */
+    gameWon = new gamewondialog(ui->gameWonWidget);
+    gameWon->setVisible(false);
+    ui->gameWonWidget->setVisible(false);
 
     /* Game Over Widget */
     gameOver = new GameOverDialog(ui->gameOverDialog);
@@ -91,7 +97,6 @@ void Game::receiveNumberClicked(QString num)
         cells[indexJ][indexI]->setText(num);
         sendPuzzleInput(num.toInt(), indexJ, indexI);
     }
-
 }
 
 void Game::receiveCorrectInput(int input, int indexJ, int indexI)
@@ -123,8 +128,7 @@ void Game::receiveIncorrectInput(int input, int indexJ, int indexI)
  */
 void Game::receiveWonGame()
 {
-    ui->winGame->setVisible(true);
-
+    box2D->show();
 }
 
 void Game::receiveSecondChace()
@@ -159,6 +163,9 @@ void Game::receiveCells(QVector<QVector<QLabel *>> cells_)
  */
 void Game::eraseButtonClicked()
 {
+    gameWon->setVisible(true);
+    ui->gameWonWidget->setVisible(true);
+    ui->box2DWidget->show();
     qDebug() << "cells[indexJ][indexI]->isEnabled()";
     if(indexI != -1 && indexJ != -1)
     {

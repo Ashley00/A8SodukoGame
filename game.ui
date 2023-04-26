@@ -82,19 +82,6 @@
     </rect>
    </property>
   </widget>
-  <widget class="QLabel" name="winGame">
-   <property name="geometry">
-    <rect>
-     <x>403</x>
-     <y>431</y>
-     <width>95</width>
-     <height>19</height>
-    </rect>
-   </property>
-   <property name="text">
-    <string>Win the game!</string>
-   </property>
-  </widget>
   <widget class="QLabel" name="mistakesLabel">
    <property name="geometry">
     <rect>
@@ -140,7 +127,44 @@
     </size>
    </property>
   </widget>
+  <widget class="SceneWidget" name="box2DWidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>100</x>
+     <y>20</y>
+     <width>1000</width>
+     <height>1000</height>
+    </rect>
+   </property>
+   <property name="minimumSize">
+    <size>
+     <width>500</width>
+     <height>500</height>
+    </size>
+   </property>
+  </widget>
+  <widget class="QWidget" name="gameWonWidget" native="true">
+   <property name="geometry">
+    <rect>
+     <x>300</x>
+     <y>100</y>
+     <width>391</width>
+     <height>261</height>
+    </rect>
+   </property>
+   <property name="styleSheet">
+    <string notr="true">background-color: rgb(255, 212, 248)</string>
+   </property>
+  </widget>
  </widget>
+ <customwidgets>
+  <customwidget>
+   <class>SceneWidget</class>
+   <extends>QWidget</extends>
+   <header>scenewidget.h</header>
+   <container>1</container>
+  </customwidget>
+ </customwidgets>
  <resources>
   <include location="images.qrc"/>
  </resources>
