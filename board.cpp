@@ -19,6 +19,22 @@ void Board::receiveBoard(int level_, std::vector<std::vector<int>> displayVector
     level = level_;
     vector = std::vector<std::vector<int>>(level, std::vector<int>(level, 0));
     showLines();
+
+    // Remove existing layout and widgets
+    QLayout *existingLayout = layout();
+    if (existingLayout != nullptr) {
+        // Clear existing numbers in QLabel widgets, if any
+        for (int i = 0; i < cells.size(); i++) {
+            for (int j = 0; j < cells[i].size(); j++) {
+                QLabel *squareLabel = cells[i][j];
+                if (squareLabel != nullptr) {
+                    squareLabel->setText("");
+                }
+            }
+        }
+        delete existingLayout;
+    }
+
     /* Sudoku Board Widget */
     QGridLayout *gridLayout = new QGridLayout(this);
     gridLayout->setSpacing(0);

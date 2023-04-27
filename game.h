@@ -67,6 +67,7 @@ private slots:
     void on_undoButton_clicked();
 
 public slots:
+    void resetMistake();
     void receiveLevel4(int);
     void receiveLevel9(int);
     void receiveLevelExample(int);

@@ -49,6 +49,7 @@ signals:
                              std::vector<int>, bool);
 
 public slots:
+    void sendBackLevel();
     void changeLevel(int level);
     void generator();
 

@@ -74,8 +74,10 @@ Game::Game(Model& model, QWidget *parent) :
 
 
     /* Model */
-    connect(this, &Game::sendPuzzleInput, &model, &Model::receivePuzzleInput);
+    connect(ui->newGameButton, &QPushButton::clicked,  &model, &Model::sendBackLevel);
+    connect(ui->newGameButton, &QPushButton::clicked,  this, &Game::resetMistake);
 
+    connect(this, &Game::sendPuzzleInput, &model, &Model::receivePuzzleInput);
 
 
     connect(&model, &Model::sendCorrectInput, this, &Game::receiveCorrectInput);
@@ -91,6 +93,11 @@ Game::Game(Model& model, QWidget *parent) :
 Game::~Game()
 {
     delete ui;
+}
+
+void Game::resetMistake(){
+    mistakes = 0;
+    ui->mistakesLabel->setText(QString("Mistakes: %1/5").arg(mistakes));
 }
 
 //wjw

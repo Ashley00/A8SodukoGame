@@ -13,6 +13,10 @@ Model::Model(QObject *parent)
 
 }
 
+void Model::sendBackLevel(){
+    receiveInitModel(level);
+}
+
 //wjw
 void Model::receivePuzzleInput(int input, int indexJ, int indexI, int level, bool checkall)
 {
