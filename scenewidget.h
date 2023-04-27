@@ -11,6 +11,8 @@ class SceneWidget : public QWidget
 public:
     explicit SceneWidget(QWidget *parent = nullptr);
     void paintEvent(QPaintEvent *);
+    void recreateBody();
+
 signals:
 
 public slots:
