@@ -95,6 +95,7 @@ private:
     std::vector<int> numbersDisable;
 
     bool isNoteMode;
+    void eraseButtonDisplay();
 
 
 };

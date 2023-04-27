@@ -389,12 +389,8 @@ void Game::eraseButtonClicked()
 
             cells[indexJ][indexI]->setText("");
             vector[indexJ][indexI] = 0;
-//            for(int i =0;i<level;i++){
-//                for(int j=0;j<level;j++){
-//                    for(int k=0;k<4;k++)
-//                        emit sendPuzzleInput(k+1, i, j, level,true);
-//                }
-//            }
+            ui->eraseButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(173, 216, 230, 128);}");
+            QTimer::singleShot(100, this, &Game::eraseButtonDisplay);
             sendSetVector(indexJ,indexI,0);
         }
     }
@@ -443,13 +439,20 @@ void Game::receiveDisplayVector(std::vector<std::vector<int>> dv)
     emit(sendInitNumbers(level));
 }
 
+void Game::eraseButtonDisplay()
+{
+    ui->eraseButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(0, 0, 0, 0);}");
+}
+
 
 void Game::on_notesButton_clicked()
 {
     isNoteMode = !isNoteMode;
-    if(isNoteMode)
-        ui->notesButton->setStyleSheet("background-color : rgba(173, 216, 230, 128);");
-    else
-        ui->notesButton->setStyleSheet("background-color : rgba(0, 0, 0, 0);");
+    if(isNoteMode){
+        ui->notesButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(173, 216, 230, 128);}");
+    }
+    else{
+        ui->notesButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(0, 0, 0, 0);}");
+    }
 }
 
