@@ -329,7 +329,7 @@ void Model::receiveInitModel(int level_)
     // initialize with 4*4 Sudoku game
     level = level_;
     generateGame(level);
-    emit(sendDispplayVector(displayVector));
+    emit(sendDispplayVector(displayVector, solutionVector));
 }
 
 void Model::receiveInitExampleModel(int level_)
@@ -349,6 +349,6 @@ void Model::receiveInitExampleModel(int level_)
                       {3,2,1,4},
                       {1,4,3,2}};
     currentVector = displayVector;
-    emit(sendDispplayVector(displayVector));
+    emit(sendDispplayVector(displayVector, solutionVector));
 }
 

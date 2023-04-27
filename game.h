@@ -64,11 +64,14 @@ private slots:
 
     void on_notesButton_clicked();
 
+    void on_undoButton_clicked();
+
 public slots:
     void receiveLevel4(int);
     void receiveLevel9(int);
     void receiveLevelExample(int);
-    void receiveDisplayVector(std::vector<std::vector<int>>);
+    void receiveDisplayVector(std::vector<std::vector<int>>, std::vector<std::vector<int>>);
+
 
 
 private:
@@ -89,6 +92,7 @@ private:
     std::vector<std::vector<int>> vector;
 
     std::vector<std::vector<int>> prefixVector;
+    std::vector<std::vector<int>> solutionVector;
 
     bool isExampleMode;
 
@@ -96,6 +100,7 @@ private:
 
     bool isNoteMode;
     void eraseButtonDisplay();
+    void hintButtonDisplay();
 
 
 };

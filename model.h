@@ -33,7 +33,7 @@ signals:
     void sendCorrectInput(int, int, int);
     void sendIncorrectInput(int, int, int);
     void sendWonGame();
-    void sendDispplayVector(std::vector<std::vector<int>>);
+    void sendDispplayVector(std::vector<std::vector<int>>, std::vector<std::vector<int>>);
 
     //wjw
     void sendVectorsAndIndex(int, int,

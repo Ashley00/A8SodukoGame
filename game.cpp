@@ -248,42 +248,137 @@ void Game::receiveNumbers(QVector<QLabel *> nums)
 void Game::receiveNumberClicked(QString num)
 {
     if(isNoteMode && vector[indexJ][indexI] == 0 && prefixVector[indexJ][indexI] == 0){
-       QString text = cells[indexJ][indexI]->text();
-       QString str1 = "";
-       if(text.contains("1"))
-           str1 = "1";
-       QString str2 = "";
-       if(text.contains("2"))
-           str2 = "2";
-       QString str3 = "";
-       if(text.contains("3"))
-           str3 = "3";
-       QString str4 = "";
-       if(text.contains("4"))
-           str4 = "4";
-       QString empty = "\n";
+       if(level == 4)
+       {
+           QString text = cells[indexJ][indexI]->text();
+           QString str1 = "";
+           if(text.contains("1"))
+               str1 = "1";
+           QString str2 = "";
+           if(text.contains("2"))
+               str2 = "2";
+           QString str3 = "";
+           if(text.contains("3"))
+               str3 = "3";
+           QString str4 = "";
+           if(text.contains("4"))
+               str4 = "4";
+           QString empty = "\n";
 
-       if(!text.contains("1") && num == "1")
-            str1 = "1";
-       else if(text.contains("1") && num == "1")
-            str1 = "";
+           if(!text.contains("1") && num == "1")
+                str1 = "1";
+           else if(text.contains("1") && num == "1")
+                str1 = "";
 
-       if(!text.contains("2") && num == "2")
-            str2 = "2";
-       else if(text.contains("2") && num == "2")
-            str2 = "";
+           if(!text.contains("2") && num == "2")
+                str2 = "2";
+           else if(text.contains("2") && num == "2")
+                str2 = "";
 
-       if(!text.contains("3") && num == "3")
-            str3 = "3";
-       else if(text.contains("3") && num == "3")
-            str3 = "";
+           if(!text.contains("3") && num == "3")
+                str3 = "3";
+           else if(text.contains("3") && num == "3")
+                str3 = "";
 
-       if(!text.contains("4") && num == "4")
-            str4 = "4";
-       else if(text.contains("4") && num == "4")
-            str4 = "";
+           if(!text.contains("4") && num == "4")
+                str4 = "4";
+           else if(text.contains("4") && num == "4")
+                str4 = "";
 
-       cells[indexJ][indexI]->setText("<font color='red'>" + str1 + empty + "</font><font color='blue'>" + str2 + "</font>" +  "</font><br><font color='green'>" + str3 + empty + "</font><font color='purple'>" + str4 + "</font>");
+           cells[indexJ][indexI]->setText("<font color='red'>" + str1 + empty + "</font><font color='blue'>" + str2 + "</font>" +  "</font><br><font color='green'>" + str3 + empty + "</font><font color='purple'>" + str4 + "</font>");
+       }
+       if(level == 9)
+       {
+           QString text = cells[indexJ][indexI]->text();
+           QString str1 = "";
+           if(text.contains("1"))
+               str1 = "1";
+           QString str2 = "";
+           if(text.contains("2"))
+               str2 = "2";
+           QString str3 = "";
+           if(text.contains("3"))
+               str3 = "3";
+           QString str4 = "";
+           if(text.contains("4"))
+               str4 = "4";
+           QString str5 = "";
+           if(text.contains("5"))
+               str5 = "5";
+           QString str6 = "";
+           if(text.contains("6"))
+               str6 = "6";
+           QString str7 = "";
+           if(text.contains("7"))
+               str7 = "7";
+           QString str8 = "";
+           if(text.contains("8"))
+               str8 = "8";
+           QString str9 = "";
+           if(text.contains("9"))
+               str9 = "9";
+
+           QString empty = "\n";
+
+           if(!text.contains("1") && num == "1")
+                str1 = "1";
+           else if(text.contains("1") && num == "1")
+                str1 = "";
+
+           if(!text.contains("2") && num == "2")
+                str2 = "2";
+           else if(text.contains("2") && num == "2")
+                str2 = "";
+
+           if(!text.contains("3") && num == "3")
+                str3 = "3";
+           else if(text.contains("3") && num == "3")
+                str3 = "";
+
+           if(!text.contains("4") && num == "4")
+                str4 = "4";
+           else if(text.contains("4") && num == "4")
+                str4 = "";
+
+           if(!text.contains("5") && num == "5")
+                str5 = "5";
+           else if(text.contains("5") && num == "5")
+                str5 = "";
+
+           if(!text.contains("6") && num == "6")
+                str6 = "6";
+           else if(text.contains("6") && num == "6")
+                str6 = "";
+
+           if(!text.contains("7") && num == "7")
+                str7 = "7";
+           else if(text.contains("7") && num == "7")
+                str7 = "";
+
+           if(!text.contains("8") && num == "8")
+                str8 = "8";
+           else if(text.contains("8") && num == "8")
+                str8 = "";
+
+           if(!text.contains("9") && num == "9")
+                str9 = "9";
+           else if(text.contains("9") && num == "9")
+                str9 = "";
+
+           cells[indexJ][indexI]->setText("<font color='red'>" + str1 + empty
+                                          + "</font><font color='blue'>" + str2  + empty
+                                          + "</font><font color='yellow'>" + str3 + "</font>"
+                                          + "</font><br><font color='green'>" + str4 + empty
+                                          + "</font><font color='purple'>" + str5 + empty
+                                          + "</font><font color='orange'>" + str6 + "</font>"
+                                          + "</font><br><font color='orange'>" + str7 + empty
+                                          + "</font><font color='black'>" + str8 + empty
+                                          + "</font><font color='purple'>" + str9 + "</font>"
+                                          );
+           QFont font = cells[indexJ][indexI]->font();
+           font.setPointSize(8);
+           cells[indexJ][indexI]->setFont(font);
+       }
     }
     else if (!isNoteMode){
         if((indexI != -1 && indexJ != -1) && cells[indexJ][indexI]->isEnabled()){
@@ -384,9 +479,7 @@ void Game::eraseButtonClicked()
         qDebug() << cells[indexJ][indexI]->isEnabled();
         if(cells[indexJ][indexI]->isEnabled())
         {
-
             emit sendErase(indexJ, indexI);
-
             cells[indexJ][indexI]->setText("");
             vector[indexJ][indexI] = 0;
             ui->eraseButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(173, 216, 230, 128);}");
@@ -432,8 +525,9 @@ void Game::receiveLevelExample(int level_)
     ui->label->show();
 }
 
-void Game::receiveDisplayVector(std::vector<std::vector<int>> dv)
+void Game::receiveDisplayVector(std::vector<std::vector<int>> dv, std::vector<std::vector<int>> solution)
 {
+    solutionVector = solution;
     prefixVector = dv;
     emit(sendInitBoard(level, dv));
     emit(sendInitNumbers(level));
@@ -442,6 +536,11 @@ void Game::receiveDisplayVector(std::vector<std::vector<int>> dv)
 void Game::eraseButtonDisplay()
 {
     ui->eraseButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(0, 0, 0, 0);}");
+}
+
+void Game::hintButtonDisplay()
+{
+    ui->undoButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(0, 0, 0, 0);}");
 }
 
 
@@ -454,5 +553,15 @@ void Game::on_notesButton_clicked()
     else{
         ui->notesButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(0, 0, 0, 0);}");
     }
+}
+
+
+void Game::on_undoButton_clicked()
+{
+    int correctNumber = solutionVector[indexJ][indexI];
+    cells[indexJ][indexI]->setText(QString::number(correctNumber));
+    emit sendPuzzleInput(correctNumber, indexJ, indexI, level,false);
+    ui->undoButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(173, 216, 230, 128);}");
+    QTimer::singleShot(100, this, &Game::hintButtonDisplay);
 }
 
