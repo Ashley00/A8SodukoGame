@@ -23,6 +23,11 @@ public:
     
     void generateGame(int);
 
+    void newGame();
+    bool generateSudoku(int row, int col);
+    bool isSafe(int,int,int) const;
+    std::vector<std::vector<int>> createPuzzle(const std::vector<std::vector<int>>&, int);
+
 
     std::vector<int> generateNumVector(int);
     std::vector<int> findSameNumsInVectors(std::vector<int>, std::vector<int>, std::vector<int>);

@@ -345,57 +345,173 @@ void Model::generator()
     }
 }
 
+void Model::newGame()
+{
+    solutionVector.resize(level, std::vector<int>(level));
+    // Initialize the grid with zeros
+    for (int i = 0; i < level; i++) {
+        for (int j = 0; j < level; j++) {
+            solutionVector[i][j] = 0;
+        }
+    }
+    // Fill the rest of the grid
+    if (!generateSudoku(0, 0)) {
+        // In case of a failure, try again
+        newGame();
+    }
+
+}
+
+bool Model::generateSudoku(int row, int col)
+{
+    if (row == level - 1 && col == level) {
+        return true;
+    }
+    if (col == level) {
+        row++;
+        col = 0;
+    }
+
+    std::vector<int> nums = {};
+
+    if(level == 4){
+        nums.resize(4);
+        nums = {1, 2, 3, 4};
+    }
+    else if(level == 6){
+        nums.resize(6);
+        nums = {1, 2, 3, 4, 5, 6};
+    }
+    else if(level == 9){
+        nums.resize(9);
+        nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
+    }
+
+    std::random_shuffle(nums.begin(), nums.end());
+    for (int num : nums) {
+        if (isSafe(row, col, num)) {
+            solutionVector[row][col] = num;
+
+            if (generateSudoku(row, col + 1)) {
+                return true;
+            }
+        }
+    }
+    solutionVector[row][col] = 0;
+    return false;
+
+}
+
+bool Model::isSafe(int row, int col, int num) const
+{
+    // Check the row
+    for (int i = 0; i < level; i++) {
+        if (solutionVector[row][i] == num) {
+            return false;
+        }
+    }
+
+    // Check the column
+    for (int i = 0; i < level; i++) {
+        if (solutionVector[i][col] == num) {
+            return false;
+        }
+    }
+
+    if(level == 4){
+        // Check the 2x2 box
+        int boxStartRow = row - row % 2;
+        int boxStartCol = col - col % 2;
+        for (int i = 0; i < 2; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (solutionVector[i + boxStartRow][j + boxStartCol] == num) {
+                    return false;
+                }
+            }
+        }
+    }
+    else if(level == 6){
+        // Check the 3x2 box
+        int boxStartRow = row - row % 3;
+        int boxStartCol = col - col % 2;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 2; j++) {
+                if (solutionVector[i + boxStartRow][j + boxStartCol] == num) {
+                    return false;
+                }
+            }
+        }
+    }
+    else if(level == 9){
+        // Check the 3x3 box
+        int boxStartRow = row - row % 3;
+        int boxStartCol = col - col % 3;
+        for (int i = 0; i < 3; i++) {
+            for (int j = 0; j < 3; j++) {
+                if (solutionVector[i + boxStartRow][j + boxStartCol] == num) {
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}
+
+std::vector<std::vector<int>> Model::createPuzzle(const std::vector<std::vector<int>>& solution, int numBlanks) {
+    std::vector<std::vector<int>> puzzle = solution;
+    int size = solution.size();
+    srand(time(0));
+
+    for (int i = 0; i < numBlanks; ++i) {
+        int row = rand() % size;
+        int col = rand() % size;
+
+        // Make sure the selected cell is not already blank
+        while (puzzle[row][col] == 0) {
+            row = rand() % size;
+            col = rand() % size;
+        }
+
+        puzzle[row][col] = 0;
+    }
+
+    return puzzle;
+}
+
 void Model::generateGame(int level_)
 {
     level = level_;
     if(level == 4){
-        displayVector = {{2,1,0,0},
-                         {0,3,2,0},
-                         {0,0,0,4},
-                         {1,0,0,0}};
-        prefixVector = {{2,1,0,0},
-                         {0,3,2,0},
-                         {0,0,0,4},
-                         {1,0,0,0}};
-        solutionVector = {{2,1,4,3},
-                          {4,3,2,1},
-                          {3,2,1,4},
-                          {1,4,3,2}};
+        newGame();
+        std::vector<std::vector<int>> puzzel = createPuzzle(solutionVector,9);
+        displayVector = puzzel;
+        prefixVector = puzzel;
         currentVector = displayVector;
     }
 
+    if(level == 6){
+        newGame();
+        for(int i = 0; i < 6; i++){
+            for(int j = 0; j < 6; j++){
+                qDebug() << solutionVector[i][j] << " ";
+            }
+            qDebug() << "\n";
+        }
+    }
+
     if(level == 9){
-        displayVector = {{1,2,0,6,0,8,0,0,0},
-                         {5,8,4,2,3,9,7,0,1},
-                         {0,6,0,1,4,0,0,0,0},
-                         {3,7,0,0,6,1,5,8,0},
-                         {6,9,1,0,8,0,2,7,4},
-                         {4,5,8,7,0,2,0,1,3},
-                         {0,3,0,0,2,4,1,5,0},
-                         {2,0,9,8,5,0,4,3,6},
-                         {0,0,0,3,0,6,0,9,2}
-                        };
-        prefixVector = {{1,2,0,6,0,8,0,0,0},
-                        {5,8,4,2,3,9,7,0,1},
-                        {0,6,0,1,4,0,0,0,0},
-                        {3,7,0,0,6,1,5,8,0},
-                        {6,9,1,0,8,0,2,7,4},
-                        {4,5,8,7,0,2,0,1,3},
-                        {0,3,0,0,2,4,1,5,0},
-                        {2,0,9,8,5,0,4,3,6},
-                        {0,0,0,3,0,6,0,9,2}
-                       };
-        solutionVector = {{1,2,3,6,7,8,9,4,5},
-                          {5,8,4,2,3,9,7,6,1},
-                          {9,6,7,1,4,5,3,2,8},
-                          {3,7,2,4,6,1,5,8,9},
-                          {6,9,1,5,8,3,2,7,4},
-                          {4,5,8,7,9,2,6,1,3},
-                          {8,3,6,9,2,4,1,5,7},
-                          {2,1,9,8,5,7,4,3,6},
-                          {7,4,5,3,1,6,8,9,2}
-                         };
+        newGame();
+        std::vector<std::vector<int>> puzzel = createPuzzle(solutionVector,40);
+        displayVector = puzzel;
+        prefixVector = puzzel;
         currentVector = displayVector;
+        for(int i = 0; i < 9; i++){
+            QString line = "";
+            for(int j = 0; j < 9; j++){
+                line = line + QString::number(solutionVector[i][j]) + " ";
+            }
+            qDebug() << qPrintable(line);
+        }
     }
 }
 

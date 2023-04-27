@@ -414,7 +414,9 @@ void Game::receiveCorrectInput(int input, int indexJ, int indexI)
 
 void Game::receiveIncorrectInput(int input, int indexJ, int indexI)
 {
-    mistakes++;
+    if(mistakes < 5){
+        mistakes++;
+    }
     cells[indexJ][indexI]->setStyleSheet("QLabel {background-color : rgba(173, 216, 230, 128); color: red;}");
     cells[indexJ][indexI]->setText(numbers[input - 1]->text());
     vector[indexJ][indexI] = 2;

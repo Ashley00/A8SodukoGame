@@ -133,8 +133,8 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>20</x>
-     <y>60</y>
+     <x>-20</x>
+     <y>50</y>
      <width>271</width>
      <height>361</height>
     </rect>
@@ -167,6 +167,24 @@
      <width>121</width>
      <height>60</height>
     </size>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="newGameButton">
+   <property name="geometry">
+    <rect>
+     <x>735</x>
+     <y>370</y>
+     <width>240</width>
+     <height>75</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <pointsize>13</pointsize>
+    </font>
+   </property>
+   <property name="text">
+    <string>New Game</string>
    </property>
   </widget>
  </widget>
