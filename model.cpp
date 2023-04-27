@@ -494,6 +494,32 @@ void Model::generateGame(int level_)
         std::vector<std::vector<int>> puzzel = createPuzzle(solutionVector,9);
         displayVector = puzzel;
         prefixVector = puzzel;
+
+//        displayVector =  {{2,1,4,3},
+//                          {4,3,2,1},
+//                          {3,2,1,4},
+//                          {0,4,3,2}};
+//        prefixVector =  {{2,1,4,3},
+//                         {4,3,2,1},
+//                         {3,2,1,4},
+//                         {0,4,3,2}};
+//        solutionVector = {{2,1,4,3},
+//                          {4,3,2,1},
+//                          {3,2,1,4},
+//                          {1,4,3,2}};
+
+//        displayVector = {{2,1,0,0},
+//                         {0,3,2,0},
+//                         {0,0,0,4},
+//                         {1,0,0,0}};
+//        prefixVector = {{2,1,0,0},
+//                         {0,3,2,0},
+//                         {0,0,0,4},
+//                         {1,0,0,0}};
+//        solutionVector = {{2,1,4,3},
+//                          {4,3,2,1},
+//                          {3,2,1,4},
+//                          {1,4,3,2}};
         currentVector = displayVector;
     }
 
