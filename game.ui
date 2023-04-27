@@ -85,7 +85,7 @@
   <widget class="QLabel" name="mistakesLabel">
    <property name="geometry">
     <rect>
-     <x>110</x>
+     <x>10</x>
      <y>20</y>
      <width>143</width>
      <height>25</height>
@@ -133,7 +133,7 @@
   <widget class="QLabel" name="label">
    <property name="geometry">
     <rect>
-     <x>-20</x>
+     <x>10</x>
      <y>50</y>
      <width>271</width>
      <height>361</height>
