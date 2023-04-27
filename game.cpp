@@ -99,7 +99,7 @@ Game::~Game()
 void Game::resetMistake(){
     mistakes = 0;
     ui->mistakesLabel->setText(QString("Mistakes: %1/5").arg(mistakes));
-
+    gameOver->setVisible(false);
 }
 
 //wjw
@@ -236,8 +236,6 @@ void Game::receiveBoxSelected(int j, int i,
             }else{
                 if(isExampleMode)
                     numbers[i]->setStyleSheet("QLabel {  background-color: green;}");
-                else
-                    numbers[i]->setStyleSheet("QLabel {  background-color: white;}");
             }
         }
         cells[indexJ][indexI]->setEnabled(true);
