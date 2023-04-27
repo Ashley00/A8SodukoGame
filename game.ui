@@ -140,7 +140,7 @@
     </rect>
    </property>
    <property name="text">
-    <string>TextLabel</string>
+    <string>Tips</string>
    </property>
   </widget>
   <widget class="QPushButton" name="backButton">

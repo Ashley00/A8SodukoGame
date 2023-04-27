@@ -166,7 +166,7 @@ void Game::receiveBoxSelected(int j, int i,
     hint += " in this 2*2 square\n\n";
 
     //give possible answer
-    hint += "Combine all the information above, \n";
+    hint += "Combine all the possible answers, \n";
     hint += "(";
     for (int i = 0; i < possibleNumRow.size(); ++i) {
         hint += QString::number(possibleNumRow[i]);
@@ -466,6 +466,8 @@ void Game::receiveCells(QVector<QVector<QLabel *>> cells_)
 void Game::eraseButtonClicked()
 {
 
+    if(indexI == -1 && indexJ == -1)
+        return;
     gameWon->setVisible(true);
 //    ui->gameWonWidget->setVisible(true);
 //    ui->box2DWidget->show();
@@ -546,6 +548,8 @@ void Game::hintButtonDisplay()
 
 void Game::on_notesButton_clicked()
 {
+    if(indexI == -1 && indexJ == -1)
+        return;
     isNoteMode = !isNoteMode;
     if(isNoteMode){
         ui->notesButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(173, 216, 230, 128);}");
@@ -558,6 +562,8 @@ void Game::on_notesButton_clicked()
 
 void Game::on_undoButton_clicked()
 {
+    if(indexI == -1 && indexJ == -1)
+        return;
     int correctNumber = solutionVector[indexJ][indexI];
     cells[indexJ][indexI]->setText(QString::number(correctNumber));
     emit sendPuzzleInput(correctNumber, indexJ, indexI, level,false);

@@ -19,7 +19,6 @@
         <file>slide3.png</file>
         <file>slide4.png</file>
         <file>notes.png</file>
-        <file>undo.png</file>
         <file>slide5.png</file>
         <file>slide6.png</file>
         <file>slide7.png</file>
@@ -46,5 +45,7 @@
         <file>slide28.png</file>
         <file>slide29.png</file>
         <file>star.png</file>
+        <file>../../Downloads/undo.png</file>
+        <file>undo.png</file>
     </qresource>
 </RCC>
