@@ -29,6 +29,7 @@ void Board::receiveBoard(int level_, std::vector<std::vector<int>> displayVector
                 QLabel *squareLabel = cells[i][j];
                 if (squareLabel != nullptr) {
                     squareLabel->setText("");
+                    squareLabel->setEnabled(true);
                 }
             }
         }
