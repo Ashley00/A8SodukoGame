@@ -380,7 +380,7 @@ void Game::receiveNumberClicked(QString num)
            cells[indexJ][indexI]->setFont(font);
        }
     }
-    else if (!isNoteMode){
+    if (!isNoteMode){
         if((indexI != -1 && indexJ != -1) && cells[indexJ][indexI]->isEnabled()){
             if(isExampleMode){
                 auto it = std::find(numbersDisable.begin(), numbersDisable.end(), num.toInt());
@@ -392,9 +392,11 @@ void Game::receiveNumberClicked(QString num)
                         numbers[i]->setStyleSheet("QLabel {border-radius: 0px; border: 1px solid black}");
                 }
             }else{
-                cells[indexJ][indexI]->setText(num);
-                emit sendPuzzleInput(num.toInt(), indexJ, indexI, level,false);
-                qDebug() << "receiveNumberClicked is hit";
+                if(prefixVector[indexJ][indexI] == 0){
+                    cells[indexJ][indexI]->setText(num);
+                    emit sendPuzzleInput(num.toInt(), indexJ, indexI, level,false);
+                    qDebug() << "receiveNumberClicked is hit";
+                }
             }
         }
     }
@@ -431,6 +433,8 @@ void Game::receiveIncorrectInput(int input, int indexJ, int indexI)
 void Game::receiveWonGame()
 {
     box2D->show();
+    ui->gameWonWidget->setVisible(true);
+    ui->box2DWidget->show();
 }
 
 void Game::receiveSecondChace()
@@ -466,8 +470,8 @@ void Game::receiveCells(QVector<QVector<QLabel *>> cells_)
 void Game::eraseButtonClicked()
 {
 
-        ui->gameWonWidget->setVisible(true);
-        ui->box2DWidget->show();
+//        ui->gameWonWidget->setVisible(true);
+//        ui->box2DWidget->show();
 
     if(indexI == -1 && indexJ == -1)
         return;
@@ -566,10 +570,12 @@ void Game::on_undoButton_clicked()
 {
     if(indexI == -1 && indexJ == -1)
         return;
-    int correctNumber = solutionVector[indexJ][indexI];
-    cells[indexJ][indexI]->setText(QString::number(correctNumber));
-    emit sendPuzzleInput(correctNumber, indexJ, indexI, level,false);
-    ui->undoButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(173, 216, 230, 128);}");
-    QTimer::singleShot(100, this, &Game::hintButtonDisplay);
+    if(prefixVector[indexJ][indexI] == 0){
+        int correctNumber = solutionVector[indexJ][indexI];
+        cells[indexJ][indexI]->setText(QString::number(correctNumber));
+        emit sendPuzzleInput(correctNumber, indexJ, indexI, level,false);
+        ui->undoButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(173, 216, 230, 128);}");
+        QTimer::singleShot(100, this, &Game::hintButtonDisplay);
+    }
 }
 
