@@ -25,8 +25,6 @@ MainWindow::MainWindow(Model& model, QWidget *parent)
     ui->tutorialButton->setIconSize(QSize(160,80));
     ui->easyButton->setIcon(QIcon(":/images/easy.png"));
     ui->easyButton->setIconSize(QSize(160,80));
-    ui->mediumButton->setIcon(QIcon(":/images/medium.png"));
-    ui->mediumButton->setIconSize(QSize(160,80));
     ui->hardButton->setIcon(QIcon(":/images/hard.png"));
     ui->hardButton->setIconSize(QSize(160,80));
     ui->exitButton->setIcon(QIcon(":/images/exit.png"));
