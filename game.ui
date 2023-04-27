@@ -136,7 +136,7 @@
     <rect>
      <x>10</x>
      <y>50</y>
-     <width>271</width>
+     <width>261</width>
      <height>361</height>
     </rect>
    </property>
@@ -145,8 +145,15 @@
      <family>Times New Roman</family>
     </font>
    </property>
+   <property name="styleSheet">
+    <string notr="true">QLabel {
+background-color: rgb(241, 226, 182);}</string>
+   </property>
    <property name="text">
     <string>Tips</string>
+   </property>
+   <property name="scaledContents">
+    <bool>false</bool>
    </property>
   </widget>
   <widget class="QPushButton" name="backButton">
@@ -166,7 +173,7 @@
    </property>
    <property name="icon">
     <iconset resource="images.qrc">
-     <normaloff>:/images/back.png</normaloff>:/images/back.png</iconset>
+     <normaloff>:/images/back2.png</normaloff>:/images/back2.png</iconset>
    </property>
    <property name="iconSize">
     <size>

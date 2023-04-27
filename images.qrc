@@ -53,5 +53,6 @@
         <file>second.png</file>
         <file>secondchance.png</file>
         <file>main.png</file>
+        <file>back2.png</file>
     </qresource>
 </RCC>

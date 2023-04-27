@@ -8,6 +8,7 @@
 #include <QString>
 #include <QVector>
 #include <QProcess>
+#include <QPixmap>
 #include "model.h"
 #include "numbers.h"
 #include "scenewidget.h"
