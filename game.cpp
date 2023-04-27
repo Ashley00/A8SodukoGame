@@ -631,7 +631,10 @@ void Game::on_undoButton_clicked()
         return;
     if(prefixVector[indexJ][indexI] == 0){
         int correctNumber = solutionVector[indexJ][indexI];
+        QFont font = cells[indexJ][indexI]->font();
+        font.setPointSize(20);
         cells[indexJ][indexI]->setText(QString::number(correctNumber));
+        cells[indexJ][indexI]->setFont(font);
         emit sendPuzzleInput(correctNumber, indexJ, indexI, level,false);
         ui->undoButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(173, 216, 230, 128);}");
         QTimer::singleShot(100, this, &Game::hintButtonDisplay);
