@@ -98,7 +98,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Mistakes: 0/</string>
+    <string>Mistakes: 0/5</string>
    </property>
   </widget>
   <widget class="SceneWidget" name="box2DWidget" native="true">
