@@ -62,6 +62,8 @@ private slots:
     void eraseButtonClicked();
     void on_backButton_clicked();
 
+    void on_notesButton_clicked();
+
 public slots:
     void receiveLevel4(int);
     void receiveLevel9(int);
@@ -85,9 +87,14 @@ private:
     int level;
 
     std::vector<std::vector<int>> vector;
+
+    std::vector<std::vector<int>> prefixVector;
+
     bool isExampleMode;
 
     std::vector<int> numbersDisable;
+
+    bool isNoteMode;
 
 
 };
