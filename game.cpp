@@ -466,11 +466,13 @@ void Game::receiveCells(QVector<QVector<QLabel *>> cells_)
 void Game::eraseButtonClicked()
 {
 
+        ui->gameWonWidget->setVisible(true);
+        ui->box2DWidget->show();
+
     if(indexI == -1 && indexJ == -1)
         return;
     gameWon->setVisible(true);
-//    ui->gameWonWidget->setVisible(true);
-//    ui->box2DWidget->show();
+
     qDebug() << "cells[indexJ][indexI]->isEnabled()";
 
     //qDebug() << "cells[indexJ][indexI]->isEnabled()";
