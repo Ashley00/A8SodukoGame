@@ -102,6 +102,7 @@ private:
     bool isNoteMode;
     void eraseButtonDisplay();
     void hintButtonDisplay();
+    void displayCelebration();
 
 
 };
