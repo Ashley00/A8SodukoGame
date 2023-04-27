@@ -46,5 +46,12 @@
         <file>slide29.png</file>
         <file>star.png</file>
         <file>undo.png</file>
+        <file>example.png</file>
+        <file>newgame.png</file>
+        <file>newgame2.png</file>
+        <file>newgame3.png</file>
+        <file>second.png</file>
+        <file>secondchance.png</file>
+        <file>main.png</file>
     </qresource>
 </RCC>

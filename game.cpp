@@ -99,6 +99,7 @@ Game::Game(Model& model, QWidget *parent) :
     connect(this, &Game::sendInitModel, &model, &Model::receiveInitModel);
     connect(this, &Game::sendInitExampleModel, &model, &Model::receiveInitExampleModel);
 
+    //ui->label->setStyleSheet("QLabel { background-image: url(:/images/background.png); }");
 }
 
 Game::~Game()

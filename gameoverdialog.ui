@@ -17,13 +17,14 @@
    <property name="geometry">
     <rect>
      <x>120</x>
-     <y>30</y>
+     <y>20</y>
      <width>231</width>
      <height>71</height>
     </rect>
    </property>
    <property name="font">
     <font>
+     <family>Comic Sans MS</family>
      <pointsize>25</pointsize>
      <bold>true</bold>
     </font>
@@ -41,6 +42,12 @@
      <height>71</height>
     </rect>
    </property>
+   <property name="font">
+    <font>
+     <family>Times New Roman</family>
+     <pointsize>12</pointsize>
+    </font>
+   </property>
    <property name="text">
     <string>You have made 5 mistakes and lost this game</string>
    </property>
@@ -51,30 +58,58 @@
   <widget class="QPushButton" name="secondChanceBtn">
    <property name="geometry">
     <rect>
-     <x>100</x>
+     <x>50</x>
      <y>130</y>
-     <width>191</width>
-     <height>41</height>
+     <width>141</width>
+     <height>141</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="text">
-    <string>Second Chance</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/secondchance.png</normaloff>:/images/secondchance.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>200</width>
+     <height>145</height>
+    </size>
    </property>
   </widget>
   <widget class="QPushButton" name="newGameBtn">
    <property name="geometry">
     <rect>
-     <x>150</x>
-     <y>190</y>
-     <width>83</width>
-     <height>29</height>
+     <x>210</x>
+     <y>130</y>
+     <width>151</width>
+     <height>141</height>
     </rect>
    </property>
+   <property name="cursor">
+    <cursorShape>PointingHandCursor</cursorShape>
+   </property>
    <property name="text">
-    <string>New Game</string>
+    <string/>
+   </property>
+   <property name="icon">
+    <iconset resource="images.qrc">
+     <normaloff>:/images/newgame3.png</normaloff>:/images/newgame3.png</iconset>
+   </property>
+   <property name="iconSize">
+    <size>
+     <width>200</width>
+     <height>145</height>
+    </size>
    </property>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="images.qrc"/>
+ </resources>
  <connections/>
 </ui>
