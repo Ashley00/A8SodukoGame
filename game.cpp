@@ -17,12 +17,21 @@ Game::Game(Model& model, QWidget *parent) :
     indexI = -1;
     indexJ = -1;
     mistakes = 0;
+
+//    ui->box2DWidget->setEnabled(false);
+
+//    ui->box2DWidget->hide();
+
+//    box2D = new SceneWidget(ui->box2DWidget);
+
     ui->box2DWidget->hide();
+
+//    box2D = new SceneWidget(ui->box2DWidget->setEnabled(false););
+
     /* Board Widget */
     board = new Board(ui->boardWidget);
     connect(this, &Game::sendInitBoard, board, &Board::receiveBoard);
     connect(board, &Board::sendCells, this, &Game::receiveCells);
-
 
     //wjw
     connect(board, &Board::sendBoxSelected, &model, &Model::get7Vectors);
@@ -41,6 +50,7 @@ Game::Game(Model& model, QWidget *parent) :
 
     /* Game Won Widget */
     gameWon = new gamewondialog(ui->gameWonWidget);
+
     gameWon->setVisible(false);
     ui->gameWonWidget->setVisible(false);
 
@@ -432,7 +442,6 @@ void Game::receiveIncorrectInput(int input, int indexJ, int indexI)
     emit sendSetVector(indexJ,indexI,2);
     ui->mistakesLabel->setText(QString("Mistakes: %1/5").arg(mistakes));
     if(mistakes == 5){
-
         gameOver->setVisible(true);
     }
 }
@@ -443,9 +452,40 @@ void Game::receiveIncorrectInput(int input, int indexJ, int indexI)
  */
 void Game::receiveWonGame()
 {
-    box2D->show();
+//    int a = 10;
+//    int b = 10;
+//    int c = 10;
+//    int d = 10;
+//    int e = 10;
+
+//    box2D = new SceneWidget();
+//    ui->box2DWidget = box2D;
+
+//    box2D = new SceneWidget(ui->box2DWidget);
+//    ui->box2DWidget = new SceneWidget(this);
+
+
+    gameWon->setVisible(true);
     ui->gameWonWidget->setVisible(true);
+    ui->box2DWidget->recreateBody();
     ui->box2DWidget->show();
+
+//    ui->gameWonWidget->lower();
+    ui->box2DWidget->raise();
+     QTimer::singleShot(7000, this, &Game::displayCelebration);
+//    ui->box2DWidget->;
+
+
+//    gameWon->setVisible(true);
+
+//    ui->gameWonWidget->setVisible(true);
+
+//    ui->box2DWidget->show();
+//    ui->box2DWidget->setVisible(true);
+
+//    box2D->setVisible(true);
+//    box2D->show();
+
 }
 
 void Game::receiveSecondChace()
@@ -561,6 +601,12 @@ void Game::eraseButtonDisplay()
 void Game::hintButtonDisplay()
 {
     ui->undoButton->setStyleSheet("QPushButton {border-radius: 10px; border: 1px solid black;background-color : rgba(0, 0, 0, 0);}");
+}
+
+void Game::displayCelebration()
+{
+//    ui->box2DWidget->lower();
+    ui->gameWonWidget->raise();
 }
 
 
