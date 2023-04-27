@@ -18,6 +18,7 @@ void Model::receivePuzzleInput(int input, int indexJ, int indexI, int level, boo
     std::vector<int> numInRow;
     std::vector<int> numInCol;
     std::vector<int> numInBox4;
+    std::vector<int> numInBox9;
 
     std::vector<int> possibleNumInRow = generateNumVector(level);
     std::vector<int> possibleNumInCol = generateNumVector(level);
@@ -56,10 +57,15 @@ void Model::receivePuzzleInput(int input, int indexJ, int indexI, int level, boo
                                         possibleNumInBox.end());
         }
     }else if(level == 9){
-
+        numInBox9 = sameNumInBox9(indexJ, indexI);
+        for(int i = 0; i < numInBox9.size(); i++){
+            possibleNumInBox.erase(std::remove(
+                                        possibleNumInBox.begin(),
+                                        possibleNumInBox.end(),
+                                        numInBox9.at(i)),
+                                        possibleNumInBox.end());
+        }
     }
-
-    //emit send6Vectors(numInRow, possibleNumInRow, numInCol, possibleNumInCol, numInBox4, possibleNumInBox);
 
     std::vector commonNumVec = findSameNumsInVectors(possibleNumInRow, possibleNumInCol, possibleNumInBox);
 
@@ -67,10 +73,6 @@ void Model::receivePuzzleInput(int input, int indexJ, int indexI, int level, boo
 
     if(!checkall)
         currentVector[indexJ][indexI] = input;
-//    else{
-//        if(indexJ == 3 && indexI == 3 && input == 4)
-//            int a = 0;
-//    }
 
     if(inputIsPossible){
         //currentVector[indexJ][indexI] = input;
@@ -126,8 +128,6 @@ void Model::get7Vectors(int indexJ, int indexI, int _level){
                                         numInBox4.at(i)),
                                         possibleNumInBox.end());
         }
-    }else if(_level == 9){
-
     }
 
     std::vector commonNumVec = findSameNumsInVectors(possibleNumInRow, possibleNumInCol, possibleNumInBox);
@@ -192,7 +192,7 @@ std::vector<int> Model::sameNumInBox4(int r, int c){
     if((r>=0 && r<2) && (c>=0 && c<2)){
         for(int x = 0; x < 2; x++){
             for(int y = 0; y < 2; y++){
-                if(currentVector[x][y] != 0 && x != r && y != c){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
                     resultVec.push_back(currentVector[x][y]);
                 }
             }
@@ -200,7 +200,7 @@ std::vector<int> Model::sameNumInBox4(int r, int c){
     }else if((r>=0 && r<2) && (c>=2 && c<4)){
         for(int x = 0; x < 2; x++){
             for(int y = 2; y < 4; y++){
-                if(currentVector[x][y] != 0 && x != r && y != c){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
                     resultVec.push_back(currentVector[x][y]);
                 }
             }
@@ -208,7 +208,7 @@ std::vector<int> Model::sameNumInBox4(int r, int c){
     }else if((r>=2 && r<4) && (c>=0 && c<2)){
         for(int x = 2; x < 4; x++){
             for(int y = 0; y < 2; y++){
-                if(currentVector[x][y] != 0 && x != r && y != c){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
                     resultVec.push_back(currentVector[x][y]);
                 }
             }
@@ -216,7 +216,93 @@ std::vector<int> Model::sameNumInBox4(int r, int c){
     }else{
         for(int x = 2; x < 4; x++){
             for(int y = 2; y < 4; y++){
-                if(currentVector[x][y] != 0 && x != r && y != c){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }
+    return resultVec;
+}
+
+//wjw
+/**
+ * @brief Model::sameNumInBox9
+ * In 9*9 sudoku, get all filled numbers in 3*3 box that contains selected cell
+ * @param r
+ * @param c
+ * @return
+ */
+std::vector<int> Model::sameNumInBox9(int r, int c){
+    std::vector<int> resultVec;
+    if((r>=0 && r<3) && (c>=0 && c<3)){
+        for(int x=0; x<3; x++){
+            for(int y=0; y<3; y++){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else if((r>=0 && r<3) && (c>=3 && c<6)){
+        for(int x=0; x<3; x++){
+            for(int y=3; y<6; y++){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else if((r>=0 && r<3) && (c>=6 && c<9)){
+        for(int x=0; x<3; x++){
+            for(int y=6; y<9; y++){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else if((r>=3 && r<6) && (c>=0 && c<3)){
+        for(int x=3; x<6; x++){
+            for(int y=0; y<3; y++){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else if((r>=3 && r<6) && (c>=3 && c<6)){
+        for(int x=3; x<6; x++){
+            for(int y=3; y<6; y++){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else if((r>=3 && r<6) && (c>=6 && c<9)){
+        for(int x=3; x<6; x++){
+            for(int y=6; y<9; y++){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else if((r>=6 && r<9) && (c>=0 && c<3)){
+        for(int x=6; x<9; x++){
+            for(int y=0; y<3; y++){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else if((r>=6 && r<9) && (c>=3 && c<6)){
+        for(int x=6; x<9; x++){
+            for(int y=3; y<6; y++){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
+                    resultVec.push_back(currentVector[x][y]);
+                }
+            }
+        }
+    }else{
+        for(int x=6; x<9; x++){
+            for(int y=6; y<9; y++){
+                if(currentVector[x][y] != 0 && !(x == r && y == c)){
                     resultVec.push_back(currentVector[x][y]);
                 }
             }

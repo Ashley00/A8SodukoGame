@@ -27,6 +27,7 @@ public:
     std::vector<int> generateNumVector(int);
     std::vector<int> findSameNumsInVectors(std::vector<int>, std::vector<int>, std::vector<int>);
     std::vector<int> sameNumInBox4(int, int);
+    std::vector<int> sameNumInBox9(int, int);
 
 
 signals:
