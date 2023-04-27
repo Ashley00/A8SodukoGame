@@ -1,6 +1,7 @@
 #include "model.h"
 #include <QDebug>
 #include <algorithm>
+#include <random>
 
 /**
  * @brief Model::Model Constructor
@@ -387,7 +388,10 @@ bool Model::generateSudoku(int row, int col)
         nums = {1, 2, 3, 4, 5, 6, 7, 8, 9};
     }
 
-    std::random_shuffle(nums.begin(), nums.end());
+    std::random_device rd;
+    std::mt19937 g(rd());
+    std::shuffle(nums.begin(), nums.end(),g);
+    //std::random_shuffle(nums.begin(), nums.end());
     for (int num : nums) {
         if (isSafe(row, col, num)) {
             solutionVector[row][col] = num;
