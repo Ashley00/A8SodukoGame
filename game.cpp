@@ -9,6 +9,8 @@ Game::Game(Model& model, QWidget *parent) :
     ui->setupUi(this);
 
    isExampleMode = false;
+   isNoteMode = false;
+   prefixVector = model.prefixVector;
 
    // box2D->hide();
     // initialize index with -1
@@ -245,22 +247,63 @@ void Game::receiveNumbers(QVector<QLabel *> nums)
 
 void Game::receiveNumberClicked(QString num)
 {
-    if((indexI != -1 && indexJ != -1) && cells[indexJ][indexI]->isEnabled()){
-        if(isExampleMode){
-            auto it = std::find(numbersDisable.begin(), numbersDisable.end(), num.toInt());
-            if(it == numbersDisable.end()){
+    if(isNoteMode && vector[indexJ][indexI] == 0 && prefixVector[indexJ][indexI] == 0){
+       QString text = cells[indexJ][indexI]->text();
+       QString str1 = "";
+       if(text.contains("1"))
+           str1 = "1";
+       QString str2 = "";
+       if(text.contains("2"))
+           str2 = "2";
+       QString str3 = "";
+       if(text.contains("3"))
+           str3 = "3";
+       QString str4 = "";
+       if(text.contains("4"))
+           str4 = "4";
+       QString empty = "\n";
+
+       if(!text.contains("1") && num == "1")
+            str1 = "1";
+       else if(text.contains("1") && num == "1")
+            str1 = "";
+
+       if(!text.contains("2") && num == "2")
+            str2 = "2";
+       else if(text.contains("2") && num == "2")
+            str2 = "";
+
+       if(!text.contains("3") && num == "3")
+            str3 = "3";
+       else if(text.contains("3") && num == "3")
+            str3 = "";
+
+       if(!text.contains("4") && num == "4")
+            str4 = "4";
+       else if(text.contains("4") && num == "4")
+            str4 = "";
+
+       cells[indexJ][indexI]->setText("<font color='red'>" + str1 + empty + "</font><font color='blue'>" + str2 + "</font>" +  "</font><br><font color='green'>" + str3 + empty + "</font><font color='purple'>" + str4 + "</font>");
+    }
+    else if (!isNoteMode){
+        if((indexI != -1 && indexJ != -1) && cells[indexJ][indexI]->isEnabled()){
+            if(isExampleMode){
+                auto it = std::find(numbersDisable.begin(), numbersDisable.end(), num.toInt());
+                if(it == numbersDisable.end()){
+                    cells[indexJ][indexI]->setText(num);
+                    emit sendPuzzleInput(num.toInt(), indexJ, indexI, level,false);
+                    qDebug() << "receiveNumberClicked is hit";
+                    for(int i=0;i<4;i++)
+                        numbers[i]->setStyleSheet("QLabel {border-radius: 0px; border: 1px solid black}");
+                }
+            }else{
                 cells[indexJ][indexI]->setText(num);
                 emit sendPuzzleInput(num.toInt(), indexJ, indexI, level,false);
                 qDebug() << "receiveNumberClicked is hit";
-                for(int i=0;i<4;i++)
-                    numbers[i]->setStyleSheet("QLabel {border-radius: 0px; border: 1px solid black}");
             }
-        }else{
-            cells[indexJ][indexI]->setText(num);
-            emit sendPuzzleInput(num.toInt(), indexJ, indexI, level,false);
-            qDebug() << "receiveNumberClicked is hit";
         }
     }
+
 }
 
 void Game::receiveCorrectInput(int input, int indexJ, int indexI)
@@ -395,7 +438,18 @@ void Game::receiveLevelExample(int level_)
 
 void Game::receiveDisplayVector(std::vector<std::vector<int>> dv)
 {
-     emit(sendInitBoard(level, dv));
-     emit(sendInitNumbers(level));
+    prefixVector = dv;
+    emit(sendInitBoard(level, dv));
+    emit(sendInitNumbers(level));
+}
+
+
+void Game::on_notesButton_clicked()
+{
+    isNoteMode = !isNoteMode;
+    if(isNoteMode)
+        ui->notesButton->setStyleSheet("background-color : rgba(173, 216, 230, 128);");
+    else
+        ui->notesButton->setStyleSheet("background-color : rgba(0, 0, 0, 0);");
 }
 
