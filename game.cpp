@@ -413,7 +413,12 @@ void Game::receiveNumberClicked(QString num)
                 }
             }else{
                 if(prefixVector[indexJ][indexI] == 0){
+                    QFont font = cells[indexJ][indexI]->font();
+                    font.setPointSize(20);
                     cells[indexJ][indexI]->setText(num);
+                    cells[indexJ][indexI]->setFont(font);
+
+//                    cells[indexJ][indexI]->setText(num);
                     emit sendPuzzleInput(num.toInt(), indexJ, indexI, level,false);
                     qDebug() << "receiveNumberClicked is hit";
                 }
